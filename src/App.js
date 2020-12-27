@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { SeaButton, SeaUIBtnColor, SeaUIBtnStyle } from "./button/button";
 function App() {
+  var handleClick = function (e) {
+    console.log("i am at the parent class");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SeaButton
+        text="查 询"
+        color={SeaUIBtnColor.bule}
+        onclick={handleClick}
+        type={SeaUIBtnStyle.textBtn}
+        customClass=""
+      />
     </div>
   );
 }

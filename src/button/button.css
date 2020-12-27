@@ -1,0 +1,54 @@
+button.seauiBtn {
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+}
+button.seauiBtn:hover::after {
+  content: " ";
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#fff 1%, transparent 100%);
+  opacity: 0.3;
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+button.seauiBtn:focus {
+  outline: none;
+}
+button.seauiBtn:active::after {
+  display: none;
+}
+
+button.seaui-btnColor-bule {
+  border: 1px solid #0088ff;
+  background-color: #0088ff;
+}
+
+button.seaui-btnColor-green {
+  border: 1px solid #67c23a;
+  background-color: #67c23a;
+}
+
+button.seaui-btnColor-grey {
+  border: 1px solid #909399;
+  background-color: #909399;
+}
+
+button.seaui-btnColor-red {
+  border: 1px solid #f56c6c;
+  background-color: #f56c6c;
+}
+
+button.seaui-btnColor-orange {
+  border: 1px solid #e6a23c;
+  background-color: #e6a23c;
+}
+
+/*# sourceMappingURL=button.css.map */

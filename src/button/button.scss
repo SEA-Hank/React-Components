@@ -1,7 +1,7 @@
+@use '../base/SeauiBaseStyle' as base;
+
 button.seauiBtn {
-  padding: 5px 15px;
   cursor: pointer;
-  border-radius: 3px;
   outline: none;
   color: white;
   font-size: 14px;
@@ -30,14 +30,31 @@ button.seauiBtn {
       display: none;
     }
   }
+  @each $name, $color in base.$colors {
+    &.seaui-color-#{$name} {
+      border: 1px solid $color;
+      background-color: $color;
+    }
+  }
 }
 
-$colors: "bule" #0088ff, "green" #67c23a, "grey" #909399, "red" #f56c6c,
-  "orange" #e6a23c;
+button.seauiTextBtn {
+  padding: 5px 10px;
+  border-radius: 3px;
+}
 
-@each $name, $color in $colors {
-  button.seaui-btnColor-#{$name} {
-    border: 1px solid $color;
-    background-color: $color;
+button.seauiBtnIconOnLeft {
+  i {
+    padding-right: 5px;
   }
+}
+button.seauiBtnIconOnRight {
+  i {
+    padding-left: 5px;
+  }
+}
+
+button.seauiIconBtn {
+  padding: 10px 10px;
+  border-radius: 30px;
 }

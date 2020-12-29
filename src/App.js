@@ -1,8 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { SeaButton, SeaUIBtnColor, SeaUIBtnStyle } from "./button/button";
+import { SeaButton, SeaUIBtnType } from "./button/button";
+import { SeaUIColor } from "./base/SeaUIBase";
+import { SeaRadio } from "./radio/radio";
 function App() {
   var handleClick = function (e) {
+    console.log(this);
     console.log("i am at the parent class");
   };
 
@@ -10,11 +12,15 @@ function App() {
     <div className="App">
       <SeaButton
         text="查 询"
-        color={SeaUIBtnColor.bule}
+        color={SeaUIColor.bule}
+        type={SeaUIBtnType.textBtn}
         onclick={handleClick}
-        type={SeaUIBtnStyle.textBtn}
-        customClass=""
+        customClass="sdfdsfdsf"
+        icon="fa-star"
       />
+      <div style={{ marginTop: "50px" }}>
+        <SeaRadio></SeaRadio>
+      </div>
     </div>
   );
 }

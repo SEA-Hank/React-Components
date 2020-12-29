@@ -1,0 +1,34 @@
+div.seauiRadioWrapper {
+  font-size: 14px;
+  label.seauiRadioItem {
+    cursor: pointer;
+    display: inline-block;
+    span.seauiRadioDot {
+      width: 14px;
+      height: 14px;
+      border: 1px solid #dcdfe6;
+      display: inline-block;
+      border-radius: 30px;
+      vertical-align: bottom;
+      margin-right: 10px;
+    }
+    &.seauiRadioSelected {
+      color: blue;
+      span {
+        border: 1px solid blue;
+        background-color: blue;
+        &::after {
+          display: block;
+          background-color: white;
+          width: 4px;
+          height: 4px;
+          border-radius: 4px;
+          content: " ";
+          position: relative;
+          top: 4px;
+          left: 4px;
+        }
+      }
+    }
+  }
+}

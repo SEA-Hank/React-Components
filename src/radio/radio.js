@@ -35,6 +35,7 @@ export class SeaRadio extends SeaUIBase {
               value={item.value}
               selected={item.selected || false}
               callback={this.callback}
+              key={index}
             />
           );
           break;
@@ -46,6 +47,7 @@ export class SeaRadio extends SeaUIBase {
               value={item.value}
               selected={item.selected || false}
               callback={this.callback}
+              key={index}
             />
           );
           break;

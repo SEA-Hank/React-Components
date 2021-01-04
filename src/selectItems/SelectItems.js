@@ -17,7 +17,7 @@ SelectItems.propTypes = {
   selected: PropTypes.bool,
   value: PropTypes.string,
   color: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUIColor)),
-  customClass: PropTypes.func.string,
+  customClass: PropTypes.string,
 };
 
 SelectItems.defaultProps = {

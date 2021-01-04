@@ -1,0 +1,51 @@
+@import "../base/SeauiBaseStyle.scss";
+@keyframes selectedDot {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+label.seauiCircleDot {
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  span.seauiCircleDotIcon {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #dcdfe6;
+    display: inline-block;
+    border-radius: 30px;
+    vertical-align: bottom;
+    margin-right: 5px;
+  }
+
+  &.seauiCircleDotSelected {
+    span {
+      &::after {
+        display: block;
+        background-color: white;
+        width: 4px;
+        height: 4px;
+        border-radius: 4px;
+        content: " ";
+        position: relative;
+        top: 4px;
+        left: 4px;
+        animation-name: selectedDot;
+        animation-duration: 0.3s;
+        animation-fill-mode: forwards;
+      }
+    }
+    @each $name, $color in $colors {
+      &.seaui-color-#{$name} {
+        color: $color;
+        span {
+          border: 1px solid $color;
+          background-color: $color;
+        }
+      }
+    }
+  }
+}

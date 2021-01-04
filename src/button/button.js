@@ -1,16 +1,70 @@
 import "./button.scss";
 import "../fontawesome/css/all.min.css";
-import { SeaUIBase, SeaUIType, SeaUIColor } from "../base/SeaUIBase";
+import PropTypes from "prop-types";
+import { SeaUIBase } from "../base/SeaUIBase";
+import {
+  BtnType,
+  BtnTypeStyle,
+  BtnIconPosition,
+  BtnIconPositionSylte,
+  SeaUIColor,
+  SeaUIType,
+} from "./buttonTypes";
 
-/**
- * button types
- */
-export const SeaUIBtnType = {
-  iconBtn: "iconBtn",
-  textBtn: "textBtn",
-  leftIconBtn: "leftIconBtn",
-  rightIconBtn: "rightIconBtn",
-};
+export class SeaButton extends SeaUIBase {
+  constructor(props) {
+    super(props, SeaUIType.BUTTON);
+  }
+
+  classNames() {
+    return this.getClassNames(
+      ["seauiBtn", this.props.color],
+      {
+        [BtnTypeStyle.seauiIconBtn]: this.props.type === BtnType.iconBtn,
+        [BtnTypeStyle.seauiTextBtn]: this.props.type !== BtnType.iconBtn,
+
+        [BtnIconPositionSylte.iconOnLeft]:
+          this.props.type === BtnType.leftIconBtn,
+        [BtnIconPositionSylte.iconOnRight]:
+          this.props.type === BtnType.rightIconBtn,
+      },
+      this.props.customClass
+    );
+  }
+
+  showIcon(iconPosition) {
+    if (
+      (iconPosition === BtnIconPosition.left &&
+        this.props.type === BtnType.iconBtn) ||
+      (iconPosition === BtnIconPosition.left &&
+        this.props.type === BtnType.leftIconBtn) ||
+      (iconPosition === BtnIconPosition.right &&
+        this.props.type === BtnType.rightIconBtn)
+    ) {
+      let classNmae = "fas " + this.props.icon;
+      return <i className={classNmae}></i>;
+    }
+    return null;
+  }
+
+  render() {
+    return (
+      <button
+        className={this.classNames()}
+        onClick={(e) => {
+          if (this.props.onclick) {
+            this.props.onclick();
+          }
+        }}
+      >
+        {this.showIcon(BtnIconPosition.left)}
+        {this.props.type !== BtnType.iconBtn ? this.props.text : null}
+        {this.showIcon(BtnIconPosition.right)}
+      </button>
+    );
+  }
+}
+
 /**
  *props:
  *type : values in the SeaUIBtnType
@@ -20,86 +74,21 @@ export const SeaUIBtnType = {
  *customClass : custom class
  *icon : icon from fontawesome
  */
-export class SeaButton extends SeaUIBase {
-  constructor(props) {
-    super(props, SeaUIType.BUTTON);
-    this.state = {
-      type: this.props.type || SeaUIBtnType.textBtn,
-      text: this.props.text || "",
-      color: this.props.color || SeaUIColor.bule,
-      onclick: this.props.onclick || null,
-      customClass: this.props.customClass || "",
-      icon: this.props.icon || "",
-    };
-    /**
-     * icon Position onLeft or onRight
-     */
-    this.iconPosition = {
-      left: "left",
-      right: "right",
-    };
-    /**
-     * Style depend on icon position
-     */
-    this.iconPositionSylte = {
-      iconOnLeft: "seauiBtnIconOnLeft",
-      iconOnRight: "seauiBtnIconOnRight",
-    };
-    /**
-     * Text Button or Icon only button
-     */
-    this.btnTypeStyle = {
-      seauiIconBtn: "seauiIconBtn",
-      seauiTextBtn: "seauiTextBtn",
-    };
-  }
 
-  getClassName() {
-    let classes = ["seauiBtn", this.state.color];
-    if (this.state.type === SeaUIBtnType.iconBtn) {
-      classes.push(this.btnTypeStyle.seauiIconBtn);
-    } else {
-      classes.push(this.btnTypeStyle.seauiTextBtn);
-    }
-    if (this.state.type === SeaUIBtnType.leftIconBtn) {
-      classes.push(this.iconPositionSylte.iconOnLeft);
-    }
-    if (this.state.type === SeaUIBtnType.rightIconBtn) {
-      classes.push(this.iconPositionSylte.iconOnRight);
-    }
-    classes.push(this.state.customClass);
-    return classes.join(" ");
-  }
+SeaButton.propTypes = {
+  type: PropTypes.oneOf(SeaUIBase.objctToArray(BtnType)),
+  text: PropTypes.string.isRequired,
+  color: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUIColor)),
+  onclick: PropTypes.func,
+  customClass: PropTypes.string,
+  icon: PropTypes.string,
+};
 
-  showIcon(iconPosition) {
-    if (
-      (iconPosition === this.iconPosition.left &&
-        this.state.type === SeaUIBtnType.iconBtn) ||
-      (iconPosition === this.iconPosition.left &&
-        this.state.type === SeaUIBtnType.leftIconBtn) ||
-      (iconPosition === this.iconPosition.right &&
-        this.state.type === SeaUIBtnType.rightIconBtn)
-    ) {
-      let classNmae = "fas " + this.state.icon;
-      return <i className={classNmae}></i>;
-    }
-    return null;
-  }
-
-  render() {
-    return (
-      <button
-        className={this.getClassName()}
-        onClick={(e) => {
-          if (this.state.onclick) {
-            this.state.onclick();
-          }
-        }}
-      >
-        {this.showIcon(this.iconPosition.left)}
-        {this.state.type !== SeaUIBtnType.iconBtn ? this.state.text : null}
-        {this.showIcon(this.iconPosition.right)}
-      </button>
-    );
-  }
-}
+SeaButton.defaultProps = {
+  type: BtnType.textBtn,
+  text: "",
+  color: SeaUIColor.bule,
+  onclick: null,
+  customClass: "",
+  icon: "",
+};

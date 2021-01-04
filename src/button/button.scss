@@ -1,4 +1,4 @@
-@use '../base/SeauiBaseStyle' as base;
+@import "../base/SeauiBaseStyle.scss";
 
 button.seauiBtn {
   cursor: pointer;
@@ -30,7 +30,7 @@ button.seauiBtn {
       display: none;
     }
   }
-  @each $name, $color in base.$colors {
+  @each $name, $color in $colors {
     &.seaui-color-#{$name} {
       border: 1px solid $color;
       background-color: $color;

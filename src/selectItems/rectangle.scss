@@ -1,0 +1,36 @@
+@import "../base/SeauiBaseStyle.scss";
+label.seauiRectangleSelectItem {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: black;
+  border-color: brown;
+  border-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  &.rectangleSelectItemSelected {
+    color: white;
+    @each $name, $color in $colors {
+      &.seaui-color-#{$name} {
+        background-color: $color;
+      }
+    }
+  }
+
+  @each $name, $color in $colors {
+    &.seaui-color-#{$name} {
+      border-color: $color;
+    }
+  }
+
+  &:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+  &:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-right-width: 1px;
+  }
+}

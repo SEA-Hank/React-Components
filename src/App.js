@@ -1,6 +1,7 @@
 import "./App.css";
 import { SeaButton, BtnType, SeaUIColor } from "./button";
 import { SeaRadio, RadioItemType } from "./radio/";
+import { CheckBoxItem } from "./selectItems/checkBoxItem";
 function App() {
   let testdata = [
     { text: "北京", value: "01", selected: true },
@@ -26,16 +27,19 @@ function App() {
       <div style={{ marginTop: "50px" }}>
         <SeaRadio
           data={testdata}
-          color={SeaUIColor.red}
+          // color={SeaUIColor.red}
           itemType={RadioItemType.rectangle}
         ></SeaRadio>
       </div>
       <div style={{ marginTop: "50px" }}>
         <SeaRadio
           data={testdata}
-          color={SeaUIColor.red}
+          // color={SeaUIColor.red}
           itemType={RadioItemType.circleDot}
         ></SeaRadio>
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <CheckBoxItem text="北京" selected="true"></CheckBoxItem>
       </div>
     </div>
   );

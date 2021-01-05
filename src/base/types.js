@@ -11,7 +11,7 @@ export const SeaUIType = {
  * SeaUI Color
  */
 export const SeaUIColor = {
-  bule: "seaui-color-bule",
+  blue: "seaui-color-blue",
   green: "seaui-color-green",
   grey: "seaui-color-grey",
   red: "seaui-color-red",

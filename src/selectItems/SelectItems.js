@@ -23,6 +23,6 @@ SelectItems.propTypes = {
 SelectItems.defaultProps = {
   selected: false,
   value: "",
-  color: SeaUIColor.bule,
+  color: SeaUIColor.blue,
   customClass: "",
 };

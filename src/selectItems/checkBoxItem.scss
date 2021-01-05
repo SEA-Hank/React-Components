@@ -1,0 +1,39 @@
+@import "../base/SeauiBaseStyle.scss";
+label.seauiCheckBoxItem {
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: bottom;
+  span {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    border: 1px solid #dcdfe6;
+    vertical-align: bottom;
+  }
+  &.seauiCheckBoxSelected {
+    span {
+      &::after {
+        content: " ";
+        display: block;
+        width: 8px;
+        height: 4px;
+        border-bottom: 2px solid white;
+        border-left: 2px solid white;
+        transform: rotate(-45deg);
+        position: relative;
+        left: 1px;
+        top: 2px;
+      }
+    }
+    @each $name, $color in $colors {
+      &.seaui-color-#{$name} {
+        color: $color;
+        span {
+          border-color: $color;
+          background-color: $color;
+        }
+      }
+    }
+  }
+}

@@ -87,7 +87,7 @@ SeaButton.propTypes = {
 SeaButton.defaultProps = {
   type: BtnType.textBtn,
   text: "",
-  color: SeaUIColor.bule,
+  color: SeaUIColor.blue,
   onclick: null,
   customClass: "",
   icon: "",

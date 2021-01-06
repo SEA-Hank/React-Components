@@ -1,6 +1,6 @@
 import "./circleDot.scss";
 import { default as SelectItems } from "../selectItems/SelectItems";
-import { SeaUIType } from "../base/types";
+import { SeaUIType } from "../_util/types";
 
 export default class CircleDot extends SelectItems {
   constructor(props) {

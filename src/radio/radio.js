@@ -1,6 +1,6 @@
 import "./radio.scss";
 import PropTypes from "prop-types";
-import { SeaUIBase } from "../base/SeaUIBase";
+import { SeaUIBase } from "../_util/SeaUIBase";
 import { SeaUIType, SeaUIColor, RadioItemType, RadioItem } from "./radioTypes";
 export class Radio extends SeaUIBase {
   constructor(props) {

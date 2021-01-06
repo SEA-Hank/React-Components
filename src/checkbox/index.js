@@ -1,3 +1,3 @@
-export { SeaUIColor } from "../base/types";
+export { SeaUIColor } from "../_util/types";
 
 export { CheckBox } from "./checkbox";

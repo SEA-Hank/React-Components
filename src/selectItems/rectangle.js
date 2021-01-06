@@ -1,5 +1,5 @@
 import { default as SelectItems } from "./SelectItems";
-import { SeaUIType } from "../base/types";
+import { SeaUIType } from "../_util/types";
 import "./rectangle.scss";
 export default class Rectangle extends SelectItems {
   constructor(props) {

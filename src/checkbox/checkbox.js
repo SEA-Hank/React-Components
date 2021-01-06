@@ -1,6 +1,6 @@
-import { SeaUIBase } from "../base/SeaUIBase";
+import { SeaUIBase } from "../_util/SeaUIBase";
 import PropTypes from "prop-types";
-import { SeaUIType, SeaUIColor } from "../base/types";
+import { SeaUIType, SeaUIColor } from "../_util/types";
 import { CheckBoxItem } from "../selectItems/checkBoxItem";
 export class CheckBox extends SeaUIBase {
   constructor(props) {

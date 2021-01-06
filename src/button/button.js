@@ -1,7 +1,7 @@
 import "./button.scss";
 import "../fontawesome/css/all.min.css";
 import PropTypes from "prop-types";
-import { SeaUIBase } from "../base/SeaUIBase";
+import { SeaUIBase } from "../_util/SeaUIBase";
 import {
   BtnType,
   BtnTypeStyle,

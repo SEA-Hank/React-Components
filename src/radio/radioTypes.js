@@ -6,7 +6,7 @@ export const RadioItemType = {
   circleDot: "circleDot",
 };
 
-export { SeaUIType, SeaUIColor } from "../base/types";
+export { SeaUIType, SeaUIColor } from "../_util/types";
 
 export class RadioItem {
   static CircleDot = cd;

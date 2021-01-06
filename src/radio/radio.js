@@ -2,22 +2,17 @@ import "./radio.scss";
 import PropTypes from "prop-types";
 import { SeaUIBase } from "../base/SeaUIBase";
 import { SeaUIType, SeaUIColor, RadioItemType, RadioItem } from "./radioTypes";
-export class SeaRadio extends SeaUIBase {
+export class Radio extends SeaUIBase {
   constructor(props) {
-    super(props, SeaUIType.RADIO, props.value);
+    super(props, SeaUIType.RADIO);
     this.state = {
       data: this.props.data,
     };
   }
 
-  callback = (selectedValue) => {
-    this.setValue(selectedValue);
+  callback = (itemState) => {
     this.state.data.map((item, index) => {
-      if (item.value === selectedValue) {
-        item.selected = true;
-      } else {
-        item.selected = false;
-      }
+      item.selected = item.value === itemState.value && itemState.selected;
       return item;
     });
     this.setState({ data: this.state.data });
@@ -26,6 +21,9 @@ export class SeaRadio extends SeaUIBase {
   getItems() {
     let items = [];
     this.state.data.map((item, index) => {
+      if (item.selected) {
+        this.setValue(item.value);
+      }
       switch (this.props.itemType) {
         case RadioItemType.circleDot:
           items.push(
@@ -56,21 +54,30 @@ export class SeaRadio extends SeaUIBase {
     return items;
   }
 
+  classNames() {
+    return this.getClassNames("seauiRadioWrapper", this.props.customClass);
+  }
+
   render() {
-    return <div className="seauiRadioWrapper">{this.getItems()}</div>;
+    return <span className={this.classNames()}>{this.getItems()}</span>;
   }
 }
-
-SeaRadio.propTypes = {
-  value: PropTypes.string,
+/**
+ * data:{ text:<string>,value:<string>, selected:<bool>  }
+ * color : one of SeaUIColor
+ * itemType : one of RadioItemType
+ * customClass : <string>
+ */
+Radio.propTypes = {
   data: PropTypes.array,
   color: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUIColor)),
   itemType: PropTypes.oneOf(SeaUIBase.objctToArray(RadioItemType)),
+  customClass: PropTypes.string,
 };
 
-SeaRadio.defaultProps = {
-  value: "",
+Radio.defaultProps = {
   data: [],
   color: SeaUIColor.bule,
   itemType: RadioItemType.circleDot,
+  customClass: "",
 };

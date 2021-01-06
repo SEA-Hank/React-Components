@@ -11,7 +11,7 @@ import {
   SeaUIType,
 } from "./buttonTypes";
 
-export class SeaButton extends SeaUIBase {
+export class Button extends SeaUIBase {
   constructor(props) {
     super(props, SeaUIType.BUTTON);
   }
@@ -67,15 +67,15 @@ export class SeaButton extends SeaUIBase {
 
 /**
  *props:
- *type : values in the SeaUIBtnType
+ *type : one of SeaUIBtnType
  *text : button text
- *color : values in the SeaUIBtnColor
+ *color : one of SeaUIBtnColor
  *onclick : button onclick event callback
  *customClass : custom class
  *icon : icon from fontawesome
  */
 
-SeaButton.propTypes = {
+Button.propTypes = {
   type: PropTypes.oneOf(SeaUIBase.objctToArray(BtnType)),
   text: PropTypes.string.isRequired,
   color: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUIColor)),
@@ -84,7 +84,7 @@ SeaButton.propTypes = {
   icon: PropTypes.string,
 };
 
-SeaButton.defaultProps = {
+Button.defaultProps = {
   type: BtnType.textBtn,
   text: "",
   color: SeaUIColor.blue,

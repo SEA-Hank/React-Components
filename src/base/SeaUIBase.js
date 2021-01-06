@@ -7,7 +7,7 @@ export class SeaUIBase extends React.Component {
     super(props);
     this.uitype = uitype;
     this.uiID = new Date().getTime();
-    this.#value = value || "";
+    this.#value = value || null;
   }
 
   getValue() {

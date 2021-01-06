@@ -1,7 +1,7 @@
 import "./App.css";
-import { SeaButton, BtnType, SeaUIColor } from "./button";
-import { SeaRadio, RadioItemType } from "./radio/";
-import { CheckBoxItem } from "./selectItems/checkBoxItem";
+import { Button, BtnType, SeaUIColor } from "./button";
+import { Radio, RadioItemType } from "./radio/";
+import { CheckBox } from "./checkbox";
 function App() {
   let testdata = [
     { text: "北京", value: "01", selected: true },
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <SeaButton
+      <Button
         text="查 询"
         color={SeaUIColor.bule}
         type={BtnType.leftIconBtn}
@@ -25,21 +25,21 @@ function App() {
         icon="fa-star"
       />
       <div style={{ marginTop: "50px" }}>
-        <SeaRadio
+        <Radio
           data={testdata}
           // color={SeaUIColor.red}
           itemType={RadioItemType.rectangle}
-        ></SeaRadio>
+        ></Radio>
       </div>
       <div style={{ marginTop: "50px" }}>
-        <SeaRadio
+        <Radio
           data={testdata}
           // color={SeaUIColor.red}
           itemType={RadioItemType.circleDot}
-        ></SeaRadio>
+        ></Radio>
       </div>
       <div style={{ marginTop: "50px" }}>
-        <CheckBoxItem text="北京" selected="true"></CheckBoxItem>
+        <CheckBox data={testdata}></CheckBox>
       </div>
     </div>
   );

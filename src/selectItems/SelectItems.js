@@ -7,7 +7,10 @@ export default class SelectItems extends SeaUIBase {
     super(props, uitype, value);
   }
   itemClick() {
-    this.props.callback(this.getValue());
+    this.props.callback({
+      value: this.getValue(),
+      selected: !this.props.selected,
+    });
   }
 }
 

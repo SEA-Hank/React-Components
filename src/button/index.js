@@ -6,4 +6,4 @@ export {
   SeaUIColor,
 } from "./buttonTypes";
 
-export { SeaButton } from "./button";
+export { Button } from "./button";

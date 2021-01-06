@@ -1,8 +1,9 @@
 import "./checkBoxItem.scss";
+import { SeaUIType } from "../base/types";
 import { default as SelectItems } from "../selectItems/SelectItems";
 export class CheckBoxItem extends SelectItems {
   constructor(props) {
-    super(props, "", "");
+    super(props, SeaUIType.CHECKBOXITEM, props.value);
   }
 
   classNames() {
@@ -18,7 +19,12 @@ export class CheckBoxItem extends SelectItems {
 
   render() {
     return (
-      <label className={this.classNames()}>
+      <label
+        className={this.classNames()}
+        onClick={(e) => {
+          this.itemClick();
+        }}
+      >
         <span></span> {this.props.text}
       </label>
     );

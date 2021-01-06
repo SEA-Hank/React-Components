@@ -13,7 +13,7 @@ export default class CircleDot extends SelectItems {
 
   classNames() {
     return this.getClassNames(
-      ["seauiSelectItem", "seauiCircleDot"],
+      "seauiCircleDot",
       {
         seauiCircleDotSelected: this.props.selected,
         [this.props.color]: this.props.selected,

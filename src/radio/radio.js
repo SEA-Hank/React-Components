@@ -11,16 +11,16 @@ export class Radio extends SeaUIBase {
   }
 
   callback = (itemState) => {
-    this.state.data.map((item, index) => {
+    let newData = this.state.data.map((item, index) => {
       item.selected = item.value === itemState.value && itemState.selected;
       return item;
     });
-    this.setState({ data: this.state.data });
+    this.setState({ data: newData });
   };
 
   getItems() {
     let items = [];
-    this.state.data.map((item, index) => {
+    this.state.data.forEach((item, index) => {
       if (item.selected) {
         this.setValue(item.value);
       }

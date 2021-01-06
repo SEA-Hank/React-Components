@@ -11,19 +11,19 @@ export class CheckBox extends SeaUIBase {
   }
 
   callback = (itemState) => {
-    this.state.data.map((item) => {
+    let newData = this.state.data.map(function (item) {
       if (item.value === itemState.value) {
         item.selected = itemState.selected;
       }
       return item;
     });
-    this.setState({ data: this.state.data });
+    this.setState({ data: newData });
   };
 
   getItems() {
     let items = [];
     let values = [];
-    this.state.data.map((item, index) => {
+    this.state.data.forEach((item, index) => {
       if (item.selected) {
         values.push(item.value);
       }

@@ -1,12 +1,5 @@
 @import "../_util/SeauiBaseStyle.scss";
-@keyframes selectedDot {
-  from {
-    transform: scale(0.8);
-  }
-  to {
-    transform: scale(1);
-  }
-}
+
 label.seauiCircleDot {
   margin-left: 10px;
   font-size: 14px;
@@ -20,10 +13,24 @@ label.seauiCircleDot {
     border-radius: 30px;
     vertical-align: bottom;
     margin-right: 5px;
+    position: relative;
   }
 
   &.seauiCircleDotSelected {
     span {
+      &::before {
+        content: " ";
+        width: 18px;
+        height: 18px;
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+        top: -4px;
+        left: -4px;
+        animation-name: seaDotBorderEffect;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+      }
       &::after {
         display: block;
         background-color: white;
@@ -34,7 +41,7 @@ label.seauiCircleDot {
         position: relative;
         top: 4px;
         left: 4px;
-        animation-name: selectedDot;
+        animation-name: seaDotSelectedEffect;
         animation-duration: 0.3s;
         animation-fill-mode: forwards;
       }
@@ -45,8 +52,32 @@ label.seauiCircleDot {
         span {
           border: 1px solid $color;
           background-color: $color;
+          &::before {
+            border: 1px solid $color;
+            box-shadow: 0px 0px 5px $color;
+          }
         }
       }
     }
+  }
+}
+
+@keyframes seaDotSelectedEffect {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes seaDotBorderEffect {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
   }
 }

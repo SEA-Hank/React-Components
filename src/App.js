@@ -48,7 +48,7 @@ function App() {
         ></Radio>
       </div>
       <div style={{ marginTop: "50px" }}>
-        <CheckBox key="3" data={testdata2} color={SeaUIColor.red}></CheckBox>
+        <CheckBox key="3" data={testdata2} color={SeaUIColor.orange}></CheckBox>
       </div>
     </div>
   );

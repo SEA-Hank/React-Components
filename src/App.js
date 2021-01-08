@@ -1,7 +1,13 @@
 import "./App.css";
-import { Button, BtnType, SeaUIColor } from "./button";
-import { Radio, RadioItemType } from "./radio/";
-import { CheckBox } from "./checkbox";
+import {
+  Button,
+  BtnType,
+  SeaUIColor,
+  Radio,
+  RadioItemType,
+  CheckBox,
+  Select,
+} from "./_util";
 function App() {
   let testdata = [
     { text: "北京", value: "01", selected: true },
@@ -10,6 +16,12 @@ function App() {
   ];
 
   let testdata2 = [
+    { text: "北京", value: "001", selected: true },
+    { text: "广州", value: "002", selected: false },
+    { text: "上海", value: "003" },
+  ];
+
+  let testdata3 = [
     { text: "北京", value: "001", selected: true },
     { text: "广州", value: "002", selected: false },
     { text: "上海", value: "003" },
@@ -24,7 +36,7 @@ function App() {
     <div className="App">
       <Button
         text="查 询"
-        color={SeaUIColor.bule}
+        color={SeaUIColor.blue}
         type={BtnType.leftIconBtn}
         onclick={handleClick}
         customClass="sdfdsfdsf"
@@ -34,7 +46,7 @@ function App() {
       <div style={{ marginTop: "50px" }}>
         <Radio
           data={testdata}
-          // color={SeaUIColor.red}
+          color={SeaUIColor.grey}
           itemType={RadioItemType.rectangle}
           key="1"
         ></Radio>
@@ -49,6 +61,9 @@ function App() {
       </div>
       <div style={{ marginTop: "50px" }}>
         <CheckBox key="3" data={testdata2} color={SeaUIColor.orange}></CheckBox>
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <Select data={testdata3} color={SeaUIColor.red}></Select>
       </div>
     </div>
   );

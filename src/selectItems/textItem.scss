@@ -1,0 +1,17 @@
+@import "../_util/SeauiBaseStyle.scss";
+label.seaTextItem {
+  padding: 10px;
+  min-width: 100%;
+  cursor: pointer;
+  &:hover {
+    background-color: $unSelectedBorderColor;
+  }
+  &.seaTextItemSelected {
+    color: white;
+    @each $name, $color in $colors {
+      &.seaui-color-#{$name} {
+        background-color: $color;
+      }
+    }
+  }
+}

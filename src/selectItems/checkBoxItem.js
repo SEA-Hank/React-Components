@@ -1,6 +1,6 @@
 import "./checkBoxItem.scss";
 import { SeaUIType } from "../_util/types";
-import { default as SelectItems } from "../selectItems/SelectItems";
+import { default as SelectItems } from "./SelectItems";
 export class CheckBoxItem extends SelectItems {
   constructor(props) {
     super(props, SeaUIType.CHECKBOXITEM, props.value);

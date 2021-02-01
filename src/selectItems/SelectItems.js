@@ -4,7 +4,8 @@ import { SeaUIColor } from "../_util/types";
 
 export default class SelectItems extends SeaUIBase {
   constructor(props, uitype, value) {
-    super(props, uitype, value);
+    super(props, uitype);
+    this.state = { value };
   }
   itemClick() {
     this.props.callback({

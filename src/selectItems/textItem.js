@@ -7,7 +7,6 @@ export class TextItem extends SelectItems {
   }
 
   className() {
-    console.log(this.props.color);
     return this.getClassNames(
       "seaTextItem",
       this.props.selected ? "seaTextItemSelected" : "",

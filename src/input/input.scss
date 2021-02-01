@@ -1,0 +1,95 @@
+@import "../_util/SeauiBaseStyle.scss";
+%leftRadius {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+%rightRadius {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+div.seauiInput {
+  display: inline-block;
+  height: 35px;
+  line-height: 35px;
+  span {
+    height: inherit;
+    display: inline-block;
+  }
+  span.labelWrapper {
+    background-color: #fafafa;
+    border: 1px solid $unSelectedBorderColor;
+    &.labelText {
+      padding: 0px 10px;
+      &.forward {
+        @extend %leftRadius;
+      }
+      &.behind {
+        @extend %rightRadius;
+      }
+    }
+    &.labelObject {
+      border: none;
+      & > * {
+        border-radius: 0px;
+      }
+      &.forward {
+        & > * {
+          @extend %leftRadius;
+        }
+      }
+      &.behind {
+        & > * {
+          @extend %rightRadius;
+        }
+      }
+    }
+  }
+
+  span.inputWrapper {
+    margin-left: -1px;
+    margin-right: -1px;
+    border-top: 1px solid $unSelectedBorderColor;
+    border-bottom: 1px solid $unSelectedBorderColor;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    display: inline-block;
+    position: relative;
+    padding: 0px 10px;
+    z-index: 1;
+    input {
+      padding: 0px 5px;
+      border: none;
+    }
+    @each $name, $color in $colors {
+      &.seaui-color-#{$name} {
+        i {
+          color: $color;
+        }
+        &.focus {
+          box-shadow: 0px 0px 5px $color;
+          border: 1px solid $color;
+        }
+      }
+    }
+    i {
+      position: relative;
+      vertical-align: middle;
+
+      cursor: pointer;
+      visibility: hidden;
+    }
+    &.leftBorder {
+      border-left: 1px solid $unSelectedBorderColor;
+      @extend %leftRadius;
+    }
+    &.rightBorder {
+      border-right: 1px solid $unSelectedBorderColor;
+      @extend %rightRadius;
+    }
+    &.focus {
+      i.showDelBtn {
+        visibility: visible;
+      }
+    }
+  }
+}

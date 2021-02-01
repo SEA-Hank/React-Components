@@ -22,7 +22,6 @@ export class Radio extends SeaUIBase {
     let items = [];
     this.state.data.forEach((item, index) => {
       if (item.selected) {
-        this.setValue(item.value);
       }
       switch (this.props.itemType) {
         case RadioItemType.circleDot:

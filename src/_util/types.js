@@ -8,6 +8,11 @@ export const SeaUIType = {
   CHECKBOXITEM: "CHECKBOXITEM",
   SELECT: "SELECT",
 
+  INPUT: "INPUT",
+  NUMBER: "NUMBER",
+  CURRENY: "CURRENY",
+  PASSWORD: "PASSWORD",
+
   SELECTITEM_CIRCLEDOT: "SELECTITEM_CIRCLEDOT",
   SELECTITEM_RECTANGLE: "SELECTITEM_RECTANGLE",
   SELECTITEM_TEXTITEM: "SELECTITEM_TEXTITEM",
@@ -21,4 +26,10 @@ export const SeaUIColor = {
   grey: "seaui-color-grey",
   red: "seaui-color-red",
   orange: "seaui-color-orange",
+};
+
+export const SeaUISize = {
+  Normal: "Normal",
+  Large: "Large",
+  Smail: "Smail",
 };

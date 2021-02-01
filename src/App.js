@@ -7,6 +7,7 @@ import {
   RadioItemType,
   CheckBox,
   Select,
+  Input,
 } from "./_util";
 function App() {
   let testdata = [
@@ -31,7 +32,7 @@ function App() {
     console.log(this);
     console.log("i am at the parent class");
   };
-
+  let after = <Select data={testdata3} color={SeaUIColor.red}></Select>;
   return (
     <div className="App">
       <Button
@@ -64,6 +65,36 @@ function App() {
       </div>
       <div style={{ marginTop: "50px" }}>
         <Select data={testdata3} color={SeaUIColor.red}></Select>
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <Input
+          data={testdata3}
+          addonBefore="http://"
+          color={SeaUIColor.red}
+          addonAfter={after}
+        ></Input>
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <Input
+          data={testdata3}
+          addonBefore={after}
+          color={SeaUIColor.green}
+          addonAfter=".com"
+          maxLength="5"
+          showDelBtn={false}
+        ></Input>
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <Input.Number
+          addonBefore="Number :"
+          numberFormat="(###)###-####"
+        ></Input.Number>
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <Input.Curreny addonBefore="Curreny :"></Input.Curreny>
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <Input.Password addonBefore="Password"></Input.Password>
       </div>
     </div>
   );

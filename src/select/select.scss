@@ -1,14 +1,15 @@
 @import "../_util/SeauiBaseStyle.scss";
 .seaSelectWrapper {
   text-align: center;
-  min-width: 200px;
-  padding: 8px 25px 8px 10px;
+  padding: 0px 30px 0px 10px;
   border: 1px solid $unSelectedBorderColor;
   display: inline-block;
   cursor: pointer;
   position: relative;
   border-radius: 3px;
   outline: none;
+  height: 35px;
+  line-height: 35px;
   &::after {
     position: absolute;
     display: block;
@@ -22,6 +23,8 @@
     right: 8px;
   }
   .seaSelect-selectItemsWrapper {
+    line-height: normal;
+    background-color: white;
     min-width: 100%;
     position: absolute;
     //height: 150px;
@@ -38,20 +41,22 @@
 
   &.seaSelectSelected {
     &::after {
-      animation: seaSelect-SelectedEffect 0.5s ease-in-out;
+      animation: seaSelect-SelectedEffect 0.3s ease-in-out;
       animation-fill-mode: forwards;
       top: 40%;
       border-color: #0088ff;
     }
     .seaSelect-selectItemsWrapper {
       visibility: visible;
-      animation: seaSelect-itemWrapperEffect 0.5s ease-in-out;
+      animation: seaSelect-itemWrapperEffect 0.3s ease-in-out;
       animation-fill-mode: forwards;
     }
     @each $name, $color in $colors {
       &.seaui-color-#{$name} {
-        border: 1px solid $color;
-        box-shadow: 0px 0px 2px $color;
+        border-color: $color;
+        box-shadow: 0px 0px 5px $color;
+        //outline: 1px solid $color;
+
         &::after {
           border-color: $color;
         }

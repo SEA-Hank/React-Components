@@ -38,7 +38,6 @@ export class CheckBox extends SeaUIBase {
         />
       );
     });
-    this.setValue(values);
     return items;
   }
 

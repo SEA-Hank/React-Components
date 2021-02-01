@@ -3,14 +3,15 @@ import PropTypes from "prop-types";
 import { SeaUIBase } from "../_util/SeaUIBase";
 import { SeaUIType, SeaUIColor } from "./selectTypes";
 import { TextItem } from "../selectItems/textItem";
+import React from "react";
 export class Select extends SeaUIBase {
   constructor(props) {
-    super(props, SeaUIType.SELECT, props.value);
+    super(props, SeaUIType.SELECT);
     let { data, text, value } = this.init();
-    this.setValue(value);
     this.state = { selected: false, data: data, text: text };
+    this.wrapper = React.createRef();
   }
-  init(selectedItem) {
+  init = (selectedItem) => {
     let data = this.state ? this.state.data : this.props.data;
 
     let text = this.props.text;
@@ -26,33 +27,37 @@ export class Select extends SeaUIBase {
       return ele;
     });
     return { data, text, value };
-  }
+  };
 
   callback = (selectedItem) => {
     let { data, text, value } = this.init(selectedItem);
-    this.setValue(value);
     this.setState({ selected: false, data: data, text: text });
   };
 
-  uiClick = function () {
-    console.log("uiClick");
+  uiClick = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
     this.setState({ selected: true });
   };
 
-  classNames() {
+  classNames = () => {
     let names = this.getClassNames(
       "seaSelectWrapper",
       this.state.selected ? "seaSelectSelected" : "",
       this.props.color
     );
     return names;
-  }
+  };
 
-  onBlur() {
+  onBlur = () => {
     this.setState({ selected: false });
-  }
+  };
 
-  getOptions() {
+  onAnimationEnd = () => {
+    this.wrapper.current.focus();
+  };
+
+  getOptions = () => {
     let options = [];
     this.state.data.forEach((element) => {
       options.push(
@@ -66,22 +71,21 @@ export class Select extends SeaUIBase {
       );
     });
     return options;
-  }
+  };
 
   render() {
     return (
-      <div
-        tabIndex="-1"
-        onBlur={() => {
-          this.onBlur();
-        }}
-        className={this.classNames()}
-        onClick={(e) => {
-          this.uiClick();
-        }}
-      >
+      <div className={this.classNames()} onClick={this.uiClick}>
         {this.state.text}
-        <div className="seaSelect-selectItemsWrapper">{this.getOptions()}</div>
+        <div
+          ref={this.wrapper}
+          tabIndex="-1"
+          onAnimationEnd={this.onAnimationEnd}
+          onBlur={this.onBlur}
+          className="seaSelect-selectItemsWrapper"
+        >
+          {this.getOptions()}
+        </div>
       </div>
     );
   }

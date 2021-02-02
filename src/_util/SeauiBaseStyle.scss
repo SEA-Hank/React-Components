@@ -6,4 +6,19 @@ $colors: (
   "orange": #e6a23c,
 );
 
-$unSelectedBorderColor: #dcdfe6;
+$blurBorderColor: #dcdfe6;
+
+$sizes: (
+  "small": (
+    "height": 30px,
+    "fontSize": 14px,
+  ),
+  "medium": (
+    "height": 35px,
+    "fontSize": 15px,
+  ),
+  "large": (
+    "height": 40px,
+    "fontSize": 16px,
+  ),
+);

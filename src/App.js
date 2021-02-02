@@ -1,7 +1,6 @@
 import "./App.css";
 import {
   Button,
-  BtnType,
   SeaUIColor,
   Radio,
   RadioItemType,
@@ -35,15 +34,24 @@ function App() {
   let after = <Select data={testdata3} color={SeaUIColor.red}></Select>;
   return (
     <div className="App">
-      <Button
-        text="查 询"
-        color={SeaUIColor.blue}
-        type={BtnType.leftIconBtn}
-        onclick={handleClick}
-        customClass="sdfdsfdsf"
-        icon="fa-star"
-        key="0"
-      />
+      <div style={{ marginTop: "50px" }}>
+        <Button
+          text="查 询"
+          color={SeaUIColor.blue}
+          type={Button.BtnType.leftIconBtn}
+          onclick={handleClick}
+          icon="fa-star"
+          key="0"
+        />
+        <Button
+          text="查 询"
+          color={SeaUIColor.blue}
+          type={Button.BtnType.iconBtn}
+          onclick={handleClick}
+          icon="fa-star"
+          key="0"
+        />
+      </div>
       <div style={{ marginTop: "50px" }}>
         <Radio
           data={testdata}
@@ -94,7 +102,19 @@ function App() {
         <Input.Curreny addonBefore="Curreny :"></Input.Curreny>
       </div>
       <div style={{ marginTop: "50px" }}>
-        <Input.Password addonBefore="Password"></Input.Password>
+        <Input.Password
+          addonAfter={
+            <Button
+              text="查 询"
+              color={SeaUIColor.blue}
+              type={Button.BtnType.leftIconBtn}
+              onclick={handleClick}
+              customClass="sdfdsfdsf"
+              icon="fa-star"
+              key="0"
+            />
+          }
+        ></Input.Password>
       </div>
     </div>
   );

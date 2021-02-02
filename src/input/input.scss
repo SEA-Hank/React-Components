@@ -14,10 +14,11 @@ div.seauiInput {
   span {
     height: inherit;
     display: inline-block;
+    vertical-align: middle;
   }
   span.labelWrapper {
     background-color: #fafafa;
-    border: 1px solid $unSelectedBorderColor;
+    border: 1px solid $blurBorderColor;
     &.labelText {
       padding: 0px 10px;
       &.forward {
@@ -48,8 +49,8 @@ div.seauiInput {
   span.inputWrapper {
     margin-left: -1px;
     margin-right: -1px;
-    border-top: 1px solid $unSelectedBorderColor;
-    border-bottom: 1px solid $unSelectedBorderColor;
+    border-top: 1px solid $blurBorderColor;
+    border-bottom: 1px solid $blurBorderColor;
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
     display: inline-block;
@@ -63,6 +64,7 @@ div.seauiInput {
     @each $name, $color in $colors {
       &.seaui-color-#{$name} {
         i {
+          width: 20px;
           color: $color;
         }
         &.focus {
@@ -79,12 +81,14 @@ div.seauiInput {
       visibility: hidden;
     }
     &.leftBorder {
-      border-left: 1px solid $unSelectedBorderColor;
+      border-left: 1px solid $blurBorderColor;
       @extend %leftRadius;
+      margin-left: 0px;
     }
     &.rightBorder {
-      border-right: 1px solid $unSelectedBorderColor;
+      border-right: 1px solid $blurBorderColor;
       @extend %rightRadius;
+      margin-right: 0px;
     }
     &.focus {
       i.showDelBtn {

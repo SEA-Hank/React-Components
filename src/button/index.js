@@ -1,8 +1,4 @@
-export {
-  BtnType,
-  BtnTypeStyle,
-  BtnIconPosition,
-  BtnIconPositionSylte,
-} from "./buttonTypes";
-
-export { Button } from "./button";
+import { BtnType } from "./buttonTypes";
+import { Button } from "./button";
+Button.BtnType = BtnType;
+export { Button };

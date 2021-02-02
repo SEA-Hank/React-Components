@@ -29,7 +29,7 @@ export const SeaUIColor = {
 };
 
 export const SeaUISize = {
-  Normal: "Normal",
-  Large: "Large",
-  Smail: "Smail",
+  Small: "seaui-size-small",
+  Medium: "seaui-size-medium",
+  Large: "seaui-size-large",
 };

@@ -1,6 +1,6 @@
 import { Input } from "../input/input";
 
-export * from "../button";
+export { Button } from "../button";
 
 export * from "../radio";
 

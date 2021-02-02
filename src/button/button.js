@@ -1,14 +1,17 @@
 import "./button.scss";
 import "../fontawesome/css/all.min.css";
 import PropTypes from "prop-types";
-import { SeaUIBase } from "../_util/SeaUIBase";
+import {
+  SeaUIType,
+  SeaUIColor,
+  SeaUISize,
+  SeaUIBase,
+} from "../_util/SeaUIBase";
 import {
   BtnType,
   BtnTypeStyle,
   BtnIconPosition,
   BtnIconPositionSylte,
-  SeaUIColor,
-  SeaUIType,
 } from "./buttonTypes";
 
 export class Button extends SeaUIBase {
@@ -28,6 +31,8 @@ export class Button extends SeaUIBase {
         [BtnIconPositionSylte.iconOnRight]:
           this.props.type === BtnType.rightIconBtn,
       },
+      this.props.size,
+      { "seaui-disable": this.props.disable },
       this.props.customClass
     );
   }
@@ -47,16 +52,15 @@ export class Button extends SeaUIBase {
     return null;
   }
 
+  onClick = () => {
+    if (this.props.onclick && !this.props.disable) {
+      this.props.onclick();
+    }
+  };
+
   render() {
     return (
-      <button
-        className={this.classNames()}
-        onClick={(e) => {
-          if (this.props.onclick) {
-            this.props.onclick();
-          }
-        }}
-      >
+      <button className={this.classNames()} onClick={this.onClick}>
         {this.showIcon(BtnIconPosition.left)}
         {this.props.type !== BtnType.iconBtn ? this.props.text : null}
         {this.showIcon(BtnIconPosition.right)}
@@ -73,6 +77,7 @@ export class Button extends SeaUIBase {
  *onclick : button onclick event callback
  *customClass : custom class
  *icon : icon from fontawesome
+ *disable: true or false
  */
 
 Button.propTypes = {
@@ -82,6 +87,8 @@ Button.propTypes = {
   onclick: PropTypes.func,
   customClass: PropTypes.string,
   icon: PropTypes.string,
+  size: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUISize)),
+  disable: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -91,4 +98,6 @@ Button.defaultProps = {
   onclick: null,
   customClass: "",
   icon: "",
+  size: SeaUISize.Small,
+  disable: false,
 };

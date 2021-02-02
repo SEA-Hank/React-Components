@@ -1,4 +1,3 @@
-export { SeaUIType, SeaUIColor } from "../_util/types";
 /**
  * BUTTON TYPES
  */

@@ -1,6 +1,7 @@
 import React from "react";
 import "./css-reset.css";
 
+export { SeaUIType, SeaUIColor, SeaUISize } from "./types";
 export class SeaUIBase extends React.Component {
   constructor(props, uitype) {
     super(props);

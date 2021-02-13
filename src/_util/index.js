@@ -2,7 +2,7 @@ import { Input } from "../input/input";
 
 export { Button } from "../button";
 
-export * from "../radio";
+export { Radio } from "../radio";
 
 export * from "../checkbox";
 

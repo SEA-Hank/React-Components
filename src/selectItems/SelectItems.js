@@ -1,6 +1,5 @@
-import { SeaUIBase } from "../_util/SeaUIBase";
+import { SeaUIBase, SeaUIColor } from "../_util/SeaUIBase";
 import PropTypes from "prop-types";
-import { SeaUIColor } from "../_util/types";
 
 export default class SelectItems extends SeaUIBase {
   constructor(props, uitype, value) {

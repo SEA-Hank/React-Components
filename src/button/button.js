@@ -21,7 +21,7 @@ export class Button extends SeaUIBase {
 
   classNames() {
     return this.getClassNames(
-      ["seauiBtn", this.props.color],
+      ["seaui-button", this.props.color],
       {
         [BtnTypeStyle.seauiIconBtn]: this.props.type === BtnType.iconBtn,
         [BtnTypeStyle.seauiTextBtn]: this.props.type !== BtnType.iconBtn,

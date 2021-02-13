@@ -11,8 +11,8 @@ export const BtnType = {
  * Text Button or Icon only button
  */
 export const BtnTypeStyle = {
-  seauiIconBtn: "seauiIconBtn",
-  seauiTextBtn: "seauiTextBtn",
+  seauiIconBtn: "seaui-icon-button",
+  seauiTextBtn: "seaui-text-button",
 };
 /**
  * Icon position
@@ -25,6 +25,6 @@ export const BtnIconPosition = {
  * Style depend on icon position
  */
 export const BtnIconPositionSylte = {
-  iconOnLeft: "seauiBtnIconOnLeft",
-  iconOnRight: "seauiBtnIconOnRight",
+  iconOnLeft: "seaui-button-icon-on-left",
+  iconOnRight: "seaui-button-icon-on-right",
 };

@@ -1,82 +1,103 @@
 import "./radio.scss";
 import PropTypes from "prop-types";
-import { SeaUIBase } from "../_util/SeaUIBase";
-import { SeaUIType, SeaUIColor, RadioItemType, RadioItem } from "./radioTypes";
+import { SeaUIBase, SeaUIType, SeaUIColor } from "../_util/SeaUIBase";
+import { RadioOptionType } from "./radioTypes";
+import { Option } from "./option";
+import { RadioContext } from "./context";
+
 export class Radio extends SeaUIBase {
   constructor(props) {
     super(props, SeaUIType.RADIO);
     this.state = {
-      data: this.props.data,
+      options: this.props.options,
+      value: this.props.defaultValue,
     };
   }
 
+  onchange = (newValue) => {
+    if (this.props.onchange != null) {
+      this.props.onchange(newValue);
+    }
+    this.setState({ value: newValue });
+  };
+
   callback = (itemState) => {
-    let newData = this.state.data.map((item, index) => {
+    let newOptions = this.state.options.map((item, index) => {
       item.selected = item.value === itemState.value && itemState.selected;
       return item;
     });
-    this.setState({ data: newData });
+    this.setState({ options: newOptions });
   };
 
-  getItems() {
+  getOptions() {
+    if (this.props.children != null) {
+      return this.props.children;
+    }
     let items = [];
-    this.state.data.forEach((item, index) => {
-      if (item.selected) {
-      }
-      switch (this.props.itemType) {
-        case RadioItemType.circleDot:
-          items.push(
-            <RadioItem.CircleDot
-              color={this.props.color}
-              text={item.text}
-              value={item.value}
-              selected={item.selected || false}
-              callback={this.callback}
-              key={index}
-            />
-          );
+    this.state.options.forEach((item, index) => {
+      let arrt = { text: item.text, value: item.value, key: index };
+      switch (this.props.optionType) {
+        case RadioOptionType.default:
+          items.push(<Option {...arrt} />);
           break;
-        case RadioItemType.rectangle:
-          items.push(
-            <RadioItem.Rectangle
-              color={this.props.color}
-              text={item.text}
-              value={item.value}
-              selected={item.selected || false}
-              callback={this.callback}
-              key={index}
-            />
-          );
-          break;
+        // case RadioOptionType.rectangle:
+        //   items.push(
+        //     <RadioItem.Rectangle
+        //       color={this.props.color}
+        //       text={item.text}
+        //       value={item.value}
+        //       selected={item.selected || false}
+        //       callback={this.callback}
+        //       key={index}
+        //     />
+        //   );
+        //   break;
       }
     });
     return items;
   }
 
   classNames() {
-    return this.getClassNames("seauiRadioWrapper", this.props.customClass);
+    return this.getClassNames("seaui-radio-wrapper", this.props.customClass);
   }
 
   render() {
-    return <span className={this.classNames()}>{this.getItems()}</span>;
+    // let childrenToRender
+    return (
+      <RadioContext.Provider
+        value={{
+          color: this.props.color,
+          onchange: this.onchange,
+          value: this.state.value,
+        }}
+      >
+        <span className={this.classNames()}>{this.getOptions()}</span>
+      </RadioContext.Provider>
+    );
   }
 }
 /**
- * data:{ text:<string>,value:<string>, selected:<bool>  }
+ * options:{ text:<string>,value:<string>, selected:<bool>  }
+ * optionType : one of RadioItemType
  * color : one of SeaUIColor
- * itemType : one of RadioItemType
  * customClass : <string>
+ * defaultValue:<string>
+ * onchange:<function>
  */
 Radio.propTypes = {
-  data: PropTypes.array,
+  options: PropTypes.array,
+  optionType: PropTypes.oneOf(SeaUIBase.objctToArray(RadioOptionType)),
   color: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUIColor)),
-  itemType: PropTypes.oneOf(SeaUIBase.objctToArray(RadioItemType)),
   customClass: PropTypes.string,
+  defaultValue: PropTypes.string,
+  onchange: PropTypes.func,
 };
 
 Radio.defaultProps = {
-  data: [],
+  options: [],
+  optionType: RadioOptionType.default,
   color: SeaUIColor.bule,
-  itemType: RadioItemType.circleDot,
   customClass: "",
+  defaultValue: "",
+  onchange: null,
 };

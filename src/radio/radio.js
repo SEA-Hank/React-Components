@@ -1,6 +1,11 @@
 import "./radio.scss";
 import PropTypes from "prop-types";
-import { SeaUIBase, SeaUIType, SeaUIColor } from "../_util/SeaUIBase";
+import {
+  SeaUIBase,
+  SeaUIType,
+  SeaUIColor,
+  SeaUISize,
+} from "../_util/SeaUIBase";
 import { RadioOptionType } from "./radioTypes";
 import { Option } from "./option";
 import { RadioContext } from "./context";
@@ -58,7 +63,11 @@ export class Radio extends SeaUIBase {
   }
 
   classNames() {
-    return this.getClassNames("seaui-radio-wrapper", this.props.customClass);
+    return this.getClassNames(
+      "seaui-radio-wrapper",
+      this.props.size,
+      this.props.customClass
+    );
   }
 
   render() {
@@ -69,9 +78,10 @@ export class Radio extends SeaUIBase {
           color: this.props.color,
           onchange: this.onchange,
           value: this.state.value,
+          size: this.props.size,
         }}
       >
-        <span className={this.classNames()}>{this.getOptions()}</span>
+        <div className={this.classNames()}>{this.getOptions()}</div>
       </RadioContext.Provider>
     );
   }
@@ -91,6 +101,7 @@ Radio.propTypes = {
   customClass: PropTypes.string,
   defaultValue: PropTypes.string,
   onchange: PropTypes.func,
+  size: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUISize)),
 };
 
 Radio.defaultProps = {
@@ -100,4 +111,5 @@ Radio.defaultProps = {
   customClass: "",
   defaultValue: "",
   onchange: null,
+  size: SeaUISize.Small,
 };

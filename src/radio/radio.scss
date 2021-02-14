@@ -1,3 +1,12 @@
+@import "../_util/SeauiBaseStyle.scss";
+
 div.seaui-radio-wrapper {
   display: inline-block;
+  @each $name, $sizeObj in $sizes {
+    &.seaui-size-#{$name} {
+      height: map-get($sizeObj, "height");
+      line-height: map-get($sizeObj, "height");
+      font-size: map-get($sizeObj, "fontSize");
+    }
+  }
 }

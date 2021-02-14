@@ -64,7 +64,6 @@ button.seaui-button {
     //padding: 10px 10px;
     border-radius: 30px;
     @each $name, $sizeObj in $sizes {
-      @debug $sizeObj;
       &.seaui-size-#{$name} {
         height: map-get($sizeObj, "height");
         width: map-get($sizeObj, "height");

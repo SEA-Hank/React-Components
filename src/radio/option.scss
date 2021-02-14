@@ -2,24 +2,46 @@
 
 label.seaui-radio-option {
   margin-left: 10px;
-  font-size: 14px;
+  font-size: inherit;
   cursor: pointer;
   display: inline-block;
 
+  span {
+    vertical-align: middle;
+  }
+
+  @each $name, $sizeObj in $sizes {
+    &.seaui-size-#{$name} {
+      // height: map-get($sizeObj, "height");
+      // line-height: map-get($sizeObj, "height");
+      // font-size: map-get($sizeObj, "fontSize");
+      span.seaui-radio-option-icon {
+        width: map-get($sizeObj, "fontSize");
+        height: map-get($sizeObj, "fontSize");
+      }
+      &.seaui-radio-option-selected {
+        span.seaui-radio-option-icon {
+          &::before {
+            width: map-get($sizeObj, "fontSize") + 4;
+            height: map-get($sizeObj, "fontSize") + 4;
+          }
+        }
+      }
+    }
+  }
+
   span.seaui-radio-option-icon {
-    width: 14px;
-    height: 14px;
     border: 1px solid $blurBorderColor;
     display: inline-block;
-    border-radius: 30px;
-    vertical-align: bottom;
+    border-radius: 50%;
+
     margin-right: 5px;
     position: relative;
   }
   @each $name, $color in $colors {
     &.seaui-color-#{$name} {
       &:hover {
-        span {
+        span.seaui-radio-option-icon {
           border-color: $color;
           box-shadow: 0px 0px 5px $color;
         }
@@ -28,19 +50,17 @@ label.seaui-radio-option {
   }
 
   &.seaui-radio-option-selected {
-    span {
+    span.seaui-radio-option-icon {
       &::before {
         content: " ";
-        width: 18px;
-        height: 18px;
         display: block;
-        position: absolute;
+        position: relative;
         border-radius: 50%;
-        top: -4px;
-        left: -4px;
         animation-name: seaui-radio-option-border-effect;
         animation-duration: 0.5s;
         animation-fill-mode: forwards;
+        top: -4px;
+        left: -4px;
       }
       &::after {
         display: block;
@@ -49,9 +69,10 @@ label.seaui-radio-option {
         height: 4px;
         border-radius: 4px;
         content: " ";
-        position: relative;
-        top: 4px;
-        left: 4px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
         animation-name: seaui-radio-option-selected-effect;
         animation-duration: 0.3s;
         animation-fill-mode: forwards;
@@ -60,7 +81,7 @@ label.seaui-radio-option {
     @each $name, $color in $colors {
       &.seaui-color-#{$name} {
         color: $color;
-        span {
+        span.seaui-radio-option-icon {
           border: 1px solid $color;
           background-color: $color;
           &::before {
@@ -75,10 +96,12 @@ label.seaui-radio-option {
 
 @keyframes seaui-radio-option-selected-effect {
   from {
-    transform: scale(0.8);
+    //transform: scale(0.8);
+    opacity: 0;
   }
   to {
-    transform: scale(1);
+    //transform: scale(1);
+    opacity: 1;
   }
 }
 

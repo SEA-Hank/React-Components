@@ -1,5 +1,13 @@
 import "./App.css";
-import { Button, SeaUIColor, Radio, CheckBox, Select, Input } from "./_util";
+import {
+  Button,
+  SeaUIColor,
+  Radio,
+  CheckBox,
+  Select,
+  Input,
+  SeaUISize,
+} from "./_util";
 function App() {
   let testdata = [
     { text: "北京", value: "01", selected: true },
@@ -34,6 +42,7 @@ function App() {
           onclick={handleClick}
           icon="fa-star"
           key="0"
+          size={SeaUISize.Small}
         />
         <Button
           text="查 询"
@@ -43,6 +52,7 @@ function App() {
           icon="fa-star"
           key="0"
           disable={true}
+          size={SeaUISize.Medium}
         />
       </div>
       {/* <div style={{ marginTop: "50px" }}>
@@ -59,9 +69,10 @@ function App() {
           options={testdata}
           color={SeaUIColor.red}
           optionType={Radio.OptionType.default}
+          size={SeaUISize.Medium}
         >
-          <Radio.Option text="佛山" value="佛山" key="1"></Radio.Option>
-          <Radio.Option text="广州" value="广州" key="2"></Radio.Option>
+          {/* <Radio.Option text="佛山" value="佛山" key="1"></Radio.Option>
+          <Radio.Option text="广州" value="广州" key="2"></Radio.Option> */}
         </Radio>
       </div>
       <div style={{ marginTop: "50px" }}>

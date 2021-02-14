@@ -10,4 +10,4 @@ export * from "../select";
 
 export * from "../input";
 
-export { SeaUIColor } from "./types";
+export { SeaUIColor, SeaUISize } from "./types";

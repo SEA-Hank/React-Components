@@ -9,9 +9,10 @@ export class Option extends SelectItems {
     super(props, SeaUIType.RADIO_OPTION, props.value);
   }
 
-  classNames(color, value) {
+  classNames(color, size, value) {
     return this.getClassNames(
       "seaui-radio-option",
+      size,
       color,
       {
         "seaui-radio-option-selected": value == this.state.value,
@@ -21,16 +22,16 @@ export class Option extends SelectItems {
   }
 
   render() {
-    let { color, onchange, value } = this.context;
+    let { color, onchange, value, size } = this.context;
     return (
       <label
-        className={this.classNames(color, value)}
+        className={this.classNames(color, size, value)}
         onClick={() => {
           onchange(this.state.value);
         }}
       >
         <span className="seaui-radio-option-icon"></span>
-        {this.props.text}
+        <span>{this.props.text}</span>
       </label>
     );
   }

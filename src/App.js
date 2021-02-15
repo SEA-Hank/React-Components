@@ -69,7 +69,7 @@ function App() {
           key="2"
           options={testdata}
           color={SeaUIColor.red}
-          optionType={Radio.OptionType.default}
+          optionType={Radio.OptionType.button}
           size={SeaUISize.Small}
           defaultValue="02"
         >

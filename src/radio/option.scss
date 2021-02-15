@@ -12,9 +12,6 @@ label.seaui-radio-option {
 
   @each $name, $sizeObj in $sizes {
     &.seaui-size-#{$name} {
-      // height: map-get($sizeObj, "height");
-      // line-height: map-get($sizeObj, "height");
-      // font-size: map-get($sizeObj, "fontSize");
       span.seaui-radio-option-icon {
         width: map-get($sizeObj, "fontSize");
         height: map-get($sizeObj, "fontSize");

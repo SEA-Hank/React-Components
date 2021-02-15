@@ -1,8 +1,7 @@
 import "./option.scss";
-import { SeaUIType } from "../_util/types";
 import { RadioContext } from "./context";
 import PropTypes from "prop-types";
-import { SeaUIBase, SeaUIColor } from "../_util/SeaUIBase";
+import { SeaUIBase, SeaUIType } from "../_util/SeaUIBase";
 export class Option extends SeaUIBase {
   static contextType = RadioContext;
 

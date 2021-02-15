@@ -1,50 +1,33 @@
-import { RadioContext } from "./context";
-import PropTypes from "prop-types";
-import { SeaUIBase, SeaUIType } from "../_util/SeaUIBase";
-import "./buttonoption.scss";
-export class ButtonOption extends SeaUIBase {
-  static contextType = RadioContext;
+import { default as SelectItems } from "../selectItems/SelectItems";
+import { SeaUIType } from "../_util/types";
+import "./rectangle.scss";
+export default class Rectangle extends SelectItems {
   constructor(props) {
-    super(props, SeaUIType.RADIO_BUTTONOPTION);
-    this.state = { value: props.value };
+    super(props, SeaUIType.SELECTITEM_RECTANGLE, props.value);
   }
   classNames() {
-    let { color, size, value, disable } = this.context;
     return this.getClassNames(
-      ["seaui-radio-buttonoption", color, size],
-      {
-        "seaui-radio-buttonoption-selected": value == this.state.value,
-        "seaui-disable": disable || this.props.disable,
-      },
+      ["seauiRectangleSelectItem", this.props.color],
+      { rectangleSelectItemSelected: this.props.selected },
       this.props.customClass
     );
   }
-
-  onClick = () => {
-    let { onchange, disable } = this.context;
-    if (!(disable || this.props.disable)) {
-      onchange(this.state.value);
-    }
-  };
-
   render() {
     return (
-      <label className={this.classNames()} onClick={this.onClick}>
+      <label
+        className={this.classNames()}
+        onClick={(e) => {
+          this.itemClick();
+        }}
+      >
         {this.props.text}
       </label>
     );
   }
 }
-
-ButtonOption.propTypes = {
-  text: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  customClass: PropTypes.string,
-  disable: PropTypes.bool,
+Rectangle.propTypes = {
+  ...SelectItems.propTypes,
 };
-
-ButtonOption.defaultProps = {
-  value: "",
-  customClass: "",
-  disable: false,
+Rectangle.defaultProps = {
+  ...SelectItems.defaultProps,
 };

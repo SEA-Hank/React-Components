@@ -8,6 +8,7 @@ import {
 } from "../_util/SeaUIBase";
 import { RadioOptionType } from "./radioTypes";
 import { Option } from "./option";
+import { ButtonOption } from "./buttonoption";
 import { RadioContext } from "./context";
 
 export class Radio extends SeaUIBase {
@@ -51,18 +52,9 @@ export class Radio extends SeaUIBase {
         case RadioOptionType.default:
           items.push(<Option {...arrt} />);
           break;
-        // case RadioOptionType.rectangle:
-        //   items.push(
-        //     <RadioItem.Rectangle
-        //       color={this.props.color}
-        //       text={item.text}
-        //       value={item.value}
-        //       selected={item.selected || false}
-        //       callback={this.callback}
-        //       key={index}
-        //     />
-        //   );
-        //   break;
+        case RadioOptionType.button:
+          items.push(<ButtonOption {...arrt}  />);
+          break;
       }
     });
     return items;

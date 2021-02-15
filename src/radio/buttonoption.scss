@@ -1,0 +1,57 @@
+@import "../_util/SeauiBaseStyle.scss";
+label.seaui-radio-buttonoption {
+  padding: 0px 10px;
+  height: inherit;
+  display: inline-block;
+  cursor: pointer;
+  color: black;
+  border-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 1px;
+  @each $name, $color in $colors {
+    &.seaui-color-#{$name} {
+      border-color: $color;
+      &:hover {
+        color: $color;
+      }
+    }
+  }
+
+  &.seaui-radio-buttonoption-selected {
+    color: white;
+    @each $name, $color in $colors {
+      &.seaui-color-#{$name} {
+        background-color: $color;
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+
+  &:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+  &:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-right-width: 1px;
+  }
+
+  @each $name, $sizeObj in $sizes {
+    &.seaui-size-#{$name} {
+      font-size: map-get($sizeObj, "fontSize");
+    }
+  }
+
+  &.seaui-disable {
+    cursor: not-allowed;
+    background: $disableBgColor;
+    color: $disableTextColor;
+    &:hover {
+      color: $disableTextColor;
+    }
+  }
+}

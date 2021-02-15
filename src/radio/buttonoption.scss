@@ -47,7 +47,7 @@ label.seaui-radio-buttonoption {
   }
 
   &.seaui-disable {
-    border-color: $disableBorderColor;
+    //border-color: $disableBorderColor;
     cursor: not-allowed;
     background: $disableBgColor;
     color: $disableTextColor;
@@ -57,7 +57,13 @@ label.seaui-radio-buttonoption {
     &.seaui-radio-buttonoption-selected {
       background: $disableTextColor;
       color: white;
-      border-color: $disableTextColor;
+      //border-color: $disableTextColor;
+    }
+    &.seaui-disable-radio-all-disable {
+      border-color: $disableBorderColor;
+      &.seaui-radio-buttonoption-selected {
+        border-color: $disableTextColor;
+      }
     }
   }
 }

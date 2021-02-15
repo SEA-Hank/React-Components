@@ -56,27 +56,30 @@ function App() {
           size={SeaUISize.Medium}
         />
       </div>
-      {/* <div style={{ marginTop: "50px" }}>
-        <Radio
-          data={testdata}
-          color={SeaUIColor.grey}
-          itemType={RadioItemType.rectangle}
-          key="1"
-        ></Radio>
-      </div> */}
+      <div style={{ marginTop: "50px" }}>
+        <Radio data={testdata} color={SeaUIColor.grey} key="1">
+          <Radio.ButtonOption
+            text="佛山"
+            value="佛山"
+            key="1"
+          ></Radio.ButtonOption>
+          <Radio.ButtonOption
+            text="广州"
+            value="广州"
+            key="2"
+          ></Radio.ButtonOption>
+        </Radio>
+      </div>
       <div style={{ marginTop: "50px" }}>
         <Radio
           key="2"
           options={testdata}
           color={SeaUIColor.red}
-          optionType={Radio.OptionType.button}
+          optionType={Radio.OptionType.defalut}
           size={SeaUISize.Small}
-          defaultValue="02"
-          disable={true}
-        >
-          {/* <Radio.Option text="佛山" value="佛山" key="1"></Radio.Option>
-          <Radio.Option text="广州" value="广州" key="2"></Radio.Option> */}
-        </Radio>
+          defaultValue="03"
+          disable={false}
+        ></Radio>
       </div>
       <div style={{ marginTop: "50px" }}>
         <CheckBox key="3" data={testdata2} color={SeaUIColor.orange}></CheckBox>

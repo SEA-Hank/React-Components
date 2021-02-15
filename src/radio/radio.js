@@ -53,7 +53,7 @@ export class Radio extends SeaUIBase {
           items.push(<Option {...arrt} />);
           break;
         case RadioOptionType.button:
-          items.push(<ButtonOption {...arrt}  />);
+          items.push(<ButtonOption {...arrt} />);
           break;
       }
     });
@@ -78,6 +78,7 @@ export class Radio extends SeaUIBase {
           value: this.state.value,
           size: this.props.size,
           effect: this.state.effect,
+          disable: this.props.disable,
         }}
       >
         <div className={this.classNames()}>{this.getOptions()}</div>
@@ -101,6 +102,7 @@ Radio.propTypes = {
   defaultValue: PropTypes.string,
   onchange: PropTypes.func,
   size: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUISize)),
+  disable: PropTypes.bool,
 };
 
 Radio.defaultProps = {
@@ -111,4 +113,5 @@ Radio.defaultProps = {
   defaultValue: "",
   onchange: null,
   size: SeaUISize.Small,
+  disable: false,
 };

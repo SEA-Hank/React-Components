@@ -47,11 +47,17 @@ label.seaui-radio-buttonoption {
   }
 
   &.seaui-disable {
+    border-color: $disableBorderColor;
     cursor: not-allowed;
     background: $disableBgColor;
     color: $disableTextColor;
     &:hover {
       color: $disableTextColor;
+    }
+    &.seaui-radio-buttonoption-selected {
+      background: $disableTextColor;
+      color: white;
+      border-color: $disableTextColor;
     }
   }
 }

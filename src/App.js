@@ -72,6 +72,7 @@ function App() {
           optionType={Radio.OptionType.button}
           size={SeaUISize.Small}
           defaultValue="02"
+          disable={true}
         >
           {/* <Radio.Option text="佛山" value="佛山" key="1"></Radio.Option>
           <Radio.Option text="广州" value="广州" key="2"></Radio.Option> */}

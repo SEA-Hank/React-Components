@@ -1,35 +1,40 @@
 import "./option.scss";
-import { default as SelectItems } from "../selectItems/SelectItems";
 import { SeaUIType } from "../_util/types";
 import { RadioContext } from "./context";
-export class Option extends SelectItems {
+import PropTypes from "prop-types";
+import { SeaUIBase, SeaUIColor } from "../_util/SeaUIBase";
+export class Option extends SeaUIBase {
   static contextType = RadioContext;
 
   constructor(props) {
-    super(props, SeaUIType.RADIO_OPTION, props.value);
+    super(props, SeaUIType.RADIO_OPTION);
+    this.state = { value: props.value };
   }
 
-  classNames(color, size, value) {
+  classNames() {
+    let { color, size, value, disable, effect } = this.context;
     return this.getClassNames(
       "seaui-radio-option",
       size,
       color,
       {
+        "seaui-disable": disable || this.props.disable,
         "seaui-radio-option-selected": value == this.state.value,
+        "seaui-radio-option-selected-effect":
+          value == this.state.value && effect,
       },
       this.props.customClass
     );
   }
-
+  onClick = () => {
+    let { onchange, disable } = this.context;
+    if (!(disable || this.props.disable)) {
+      onchange(this.state.value);
+    }
+  };
   render() {
-    let { color, onchange, value, size } = this.context;
     return (
-      <label
-        className={this.classNames(color, size, value)}
-        onClick={() => {
-          onchange(this.state.value);
-        }}
-      >
+      <label className={this.classNames()} onClick={this.onClick}>
         <span className="seaui-radio-option-icon"></span>
         <span>{this.props.text}</span>
       </label>
@@ -38,9 +43,14 @@ export class Option extends SelectItems {
 }
 
 Option.propTypes = {
-  ...SelectItems.propTypes,
+  text: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  customClass: PropTypes.string,
+  disable: PropTypes.bool,
 };
 
 Option.defaultProps = {
-  ...SelectItems.defaultProps,
+  value: "",
+  customClass: "",
+  disable: false,
 };

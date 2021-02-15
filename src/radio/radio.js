@@ -16,6 +16,7 @@ export class Radio extends SeaUIBase {
     this.state = {
       options: this.props.options,
       value: this.props.defaultValue,
+      effect: false,
     };
   }
 
@@ -23,7 +24,7 @@ export class Radio extends SeaUIBase {
     if (this.props.onchange != null) {
       this.props.onchange(newValue);
     }
-    this.setState({ value: newValue });
+    this.setState({ value: newValue, effect: true });
   };
 
   callback = (itemState) => {
@@ -40,7 +41,12 @@ export class Radio extends SeaUIBase {
     }
     let items = [];
     this.state.options.forEach((item, index) => {
-      let arrt = { text: item.text, value: item.value, key: index };
+      let arrt = {
+        text: item.text,
+        value: item.value,
+        key: index,
+        disable: item.disable || false,
+      };
       switch (this.props.optionType) {
         case RadioOptionType.default:
           items.push(<Option {...arrt} />);
@@ -79,6 +85,7 @@ export class Radio extends SeaUIBase {
           onchange: this.onchange,
           value: this.state.value,
           size: this.props.size,
+          effect: this.state.effect,
         }}
       >
         <div className={this.classNames()}>{this.getOptions()}</div>

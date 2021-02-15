@@ -10,9 +10,9 @@ import {
 } from "./_util";
 function App() {
   let testdata = [
-    { text: "北京", value: "01", selected: true },
-    { text: "广州", value: "02", selected: false },
-    { text: "上海", value: "03" },
+    { text: "北京", value: "01", disable: false },
+    { text: "广州", value: "02", disable: false },
+    { text: "上海", value: "03", disable: true },
   ];
 
   let testdata2 = [
@@ -42,6 +42,7 @@ function App() {
           onclick={handleClick}
           icon="fa-star"
           key="0"
+          disable={true}
           size={SeaUISize.Small}
         />
         <Button
@@ -69,7 +70,8 @@ function App() {
           options={testdata}
           color={SeaUIColor.red}
           optionType={Radio.OptionType.default}
-          size={SeaUISize.Medium}
+          size={SeaUISize.Small}
+          defaultValue="02"
         >
           {/* <Radio.Option text="佛山" value="佛山" key="1"></Radio.Option>
           <Radio.Option text="广州" value="广州" key="2"></Radio.Option> */}

@@ -38,6 +38,7 @@ label.seaui-radio-option {
     margin-right: 5px;
     position: relative;
   }
+
   @each $name, $color in $colors {
     &.seaui-color-#{$name} {
       &:hover {
@@ -51,17 +52,6 @@ label.seaui-radio-option {
 
   &.seaui-radio-option-selected {
     span.seaui-radio-option-icon {
-      &::before {
-        content: " ";
-        display: block;
-        position: relative;
-        border-radius: 50%;
-        animation-name: seaui-radio-option-border-effect;
-        animation-duration: 0.5s;
-        animation-fill-mode: forwards;
-        top: -4px;
-        left: -4px;
-      }
       &::after {
         display: block;
         background-color: white;
@@ -88,6 +78,43 @@ label.seaui-radio-option {
             border: 1px solid $color;
             box-shadow: 0px 0px 5px $color;
           }
+        }
+      }
+    }
+    &.seaui-radio-option-selected-effect {
+      span.seaui-radio-option-icon {
+        &::before {
+          content: " ";
+          display: block;
+          position: relative;
+          border-radius: 50%;
+          animation-name: seaui-radio-option-border-effect;
+          animation-duration: 0.5s;
+          animation-fill-mode: forwards;
+          top: -4px;
+          left: -4px;
+        }
+      }
+    }
+  }
+
+  &.seaui-disable {
+    cursor: not-allowed;
+    span {
+      color: $disableTextColor;
+    }
+    &:hover {
+      span.seaui-radio-option-icon {
+        border-color: $disableBorderColor;
+        box-shadow: none;
+      }
+    }
+    &.seaui-radio-option-selected {
+      span.seaui-radio-option-icon {
+        border: 1px solid $disableBorderColor;
+        background-color: $disableBgColor;
+        &::after {
+          background: $disableBorderColor;
         }
       }
     }

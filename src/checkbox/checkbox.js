@@ -1,64 +1,76 @@
 import { SeaUIBase } from "../_util/SeaUIBase";
 import PropTypes from "prop-types";
 import { SeaUIType, SeaUIColor } from "../_util/types";
-import { CheckBoxItem } from "../selectItems/checkBoxItem";
+import { Option } from "./option";
+import { CheckBoxContext } from "./context";
 export class CheckBox extends SeaUIBase {
   constructor(props) {
-    super(props, SeaUIType.CHECKBOX, props.value);
+    super(props, SeaUIType.CHECKBOX);
     this.state = {
-      data: this.props.data,
+      options: this.props.options,
+      value: this.props.defaultValue,
     };
   }
 
-  callback = (itemState) => {
-    let newData = this.state.data.map(function (item) {
-      if (item.value === itemState.value) {
-        item.selected = itemState.selected;
-      }
-      return item;
-    });
-    this.setState({ data: newData });
+  onchange = (itemValue, isSelected) => {
+    if (isSelected) {
+      this.state.value = this.state.value.filter((item) => item != itemValue);
+    } else {
+      this.state.value.push(itemValue);
+    }
+    if (this.props.onchange != null) {
+      this.props.onchange(this.state.value);
+    }
+    this.setState({ value: this.state.value });
   };
 
-  getItems() {
+  getOptions() {
+    if (this.props.children != null) {
+      return this.props.children;
+    }
     let items = [];
-    let values = [];
-    this.state.data.forEach((item, index) => {
-      if (item.selected) {
-        values.push(item.value);
-      }
-      items.push(
-        <CheckBoxItem
-          color={this.props.color}
-          text={item.text}
-          value={item.value}
-          selected={item.selected || false}
-          callback={this.callback}
-          key={index}
-        />
-      );
+    this.state.options.forEach((item, index) => {
+      items.push(<Option text={item.text} value={item.value} key={index} />);
     });
     return items;
   }
 
   render() {
-    return <span>{this.getItems()}</span>;
+    return (
+      <CheckBoxContext.Provider
+        value={{
+          color: this.props.color,
+          onchange: this.onchange,
+          value: this.state.value,
+          // size: this.props.size,
+          // effect: this.state.effect,
+          // disable: this.props.disable,
+        }}
+      >
+        <span className="seaui-checkbox">{this.getOptions()}</span>
+      </CheckBoxContext.Provider>
+    );
   }
 }
 
 /**
- * data:{ text:<string>,value:<string>, selected:<bool>  }
+ * options:{ text:<string>,value:<string>, selected:<bool>  }
  * color : one of SeaUIColor
  * customClass : <string>
+ * defaultValue:[ value,value ]
  */
 CheckBox.propTypes = {
-  data: PropTypes.array,
+  options: PropTypes.array,
+  defaultValue: PropTypes.array,
   color: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUIColor)),
   customClass: PropTypes.string,
+  onchange: PropTypes.func,
 };
 
 CheckBox.defaultProps = {
-  data: [],
+  options: [],
+  defaultValue: [],
   color: SeaUIColor.bule,
   customClass: "",
+  onchange: null,
 };

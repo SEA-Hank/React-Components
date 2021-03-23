@@ -7,7 +7,7 @@
     box-shadow: null;
   }
 }
-label.seauiCheckBoxItem {
+label.seaui-checkBox-option {
   position: relative;
   font-size: 14px;
   cursor: pointer;
@@ -22,7 +22,7 @@ label.seauiCheckBoxItem {
     vertical-align: bottom;
     position: relative;
   }
-  &.seauiCheckBoxSelected {
+  &.seaui-checkBox-selected {
     // animation-name: boxShadow;
     // animation-duration: 0.5s;
     span {

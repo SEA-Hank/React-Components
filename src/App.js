@@ -78,11 +78,15 @@ function App() {
           optionType={Radio.OptionType.defalut}
           size={SeaUISize.Small}
           defaultValue="03"
-          disable={false}
+          disable={true}
         ></Radio>
       </div>
-      <div style={{ marginTop: "50px" }}>
-        <CheckBox key="3" data={testdata2} color={SeaUIColor.orange}></CheckBox>
+      <div id="dfdfdfdf" style={{ marginTop: "50px" }}>
+        <CheckBox
+          key="3"
+          options={testdata2}
+          color={SeaUIColor.orange}
+        ></CheckBox>
       </div>
       <div style={{ marginTop: "50px" }}>
         <Select data={testdata3} color={SeaUIColor.red}></Select>

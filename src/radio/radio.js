@@ -28,14 +28,6 @@ export class Radio extends SeaUIBase {
     this.setState({ value: newValue, effect: true });
   };
 
-  callback = (itemState) => {
-    let newOptions = this.state.options.map((item, index) => {
-      item.selected = item.value === itemState.value && itemState.selected;
-      return item;
-    });
-    this.setState({ options: newOptions });
-  };
-
   getOptions() {
     if (this.props.children != null) {
       return this.props.children;

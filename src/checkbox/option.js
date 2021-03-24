@@ -8,31 +8,43 @@ export class Option extends SeaUIBase {
   constructor(props) {
     super(props, SeaUIType.CHECKBOXITEM);
     this.state = { value: props.value };
+    this.effect = false;
+    this.unSelectedEffect = false;
   }
 
   classNames() {
-    console.log(this.context);
-    let { value, color } = this.context;
+    let { value, color, effect, size, disable } = this.context;
     let isSelected = value.includes(this.state.value);
     return this.getClassNames(
       "seaui-checkBox-option",
+      [size],
       {
-        "seaui-checkBox-selected": isSelected,
-        [color]: isSelected,
+        "seaui-checkBox-selected": isSelected || this.effect,
+        [color]: isSelected || this.effect,
+        "seaui-checkbox-selected-effect": isSelected && effect && this.effect,
+        "seaui-checkbox-unselected-effect":
+          this.unSelectedEffect && this.effect,
+        "seaui-disable": disable || this.props.disable,
       },
       this.props.customClass
     );
   }
 
   onClick = () => {
-    let { onchange, value } = this.context;
-    onchange(this.state.value, value.includes(this.state.value));
+    let { onchange, value, disable } = this.context;
+    if (disable || this.props.disable) {
+      return;
+    }
+    this.effect = true;
+    this.unSelectedEffect = value.includes(this.state.value);
+    onchange(this.state.value, this.unSelectedEffect);
   };
 
   render() {
     return (
       <label className={this.classNames()} onClick={this.onClick}>
-        <span></span> {this.props.text}
+        <span className="seaui-checkbox-box"></span>
+        <span className="seaui-checkbox-text">{this.props.text}</span>
       </label>
     );
   }

@@ -1,91 +1,154 @@
 @import "../_util/SeauiBaseStyle.scss";
-@keyframes boxShadow {
-  from {
-    box-shadow: 0px 0px 30px #f56c6c;
-  }
-  to {
-    box-shadow: null;
-  }
-}
+
 label.seaui-checkBox-option {
-  position: relative;
-  font-size: 14px;
   cursor: pointer;
   display: inline-block;
-  vertical-align: bottom;
   margin-left: 10px;
   span {
-    width: 14px;
-    height: 14px;
+    vertical-align: middle;
+  }
+  span.seaui-checkbox-box {
     display: inline-block;
     border: 1px solid $blurBorderColor;
-    vertical-align: bottom;
     position: relative;
+    animation-fill-mode: forwards !important;
+    margin-right: 5px;
+    &::before {
+      border-radius: 2px;
+      content: " ";
+      position: absolute;
+      animation-fill-mode: forwards !important;
+    }
+    &::after {
+      animation-fill-mode: forwards !important;
+    }
   }
-  &.seaui-checkBox-selected {
-    // animation-name: boxShadow;
-    // animation-duration: 0.5s;
-    span {
-      &::before {
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        width: 18px;
-        height: 18px;
-        border-radius: 2px;
-        content: "";
-        animation: seaCheckBoxBorderEffect 0.5s; //ease-in-out;
-        animation-fill-mode: forwards;
-        content: "";
+  @each $name, $sizeObj in $sizes {
+    &.seaui-size-#{$name} {
+      span.seaui-checkbox-text {
+        font-size: map-get($sizeObj, "fontSize");
       }
+      span.seaui-checkbox-box {
+        width: map-get($sizeObj, "fontSize");
+        height: map-get($sizeObj, "fontSize");
+        &::before {
+          display: none;
+          width: map-get($sizeObj, "fontSize") + 4;
+          height: map-get($sizeObj, "fontSize") + 4;
+        }
+      }
+    }
+  }
+
+  &.seaui-checkBox-selected {
+    span.seaui-checkbox-box {
       &::after {
-        animation: seaCheckBoxEffect 0.5s; //ease-in-out;
         content: " ";
         display: block;
         width: 8px;
         height: 4px;
         border-bottom: 2px solid white;
         border-left: 2px solid white;
-        transform: rotate(-45deg);
-        position: relative;
-        left: 1px;
-        top: 2px;
+        transform: translate(-50%, -70%) rotate(-45deg);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+      }
+    }
+    &.seaui-checkbox-selected-effect {
+      span.seaui-checkbox-box {
+        &::before {
+          display: block;
+          top: -4px;
+          left: -4px;
+          animation: seaui-checkbox-border-effect 0.3s; //ease-in-out;
+        }
+        &::after {
+          animation: seaui-checkbox-effect 0.3s; //ease-in-out;
+        }
       }
     }
     @each $name, $color in $colors {
       &.seaui-color-#{$name} {
         color: $color;
-        span {
+        span.seaui-checkbox-box {
           border-color: $color;
           background-color: $color;
           &::before {
             border: 1px solid $color;
-          }
-          &::before {
             box-shadow: 0px 0px 5px $color;
+          }
+        }
+        &.seaui-checkbox-unselected-effect {
+          color: black;
+          span.seaui-checkbox-box {
+            &::before {
+              display: none;
+            }
+            animation: seaui-checkbox-unselected-span-#{$name}-effect
+              0.3s; //ease-in-out;
+            &::after {
+              animation: seaui-checkbox-unselected-effect 0.3s; //ease-in-out;
+            }
           }
         }
       }
     }
   }
+  &.seaui-disable {
+    cursor: not-allowed;
+    span.seaui-checkbox-text {
+      color: $disableTextColor;
+    }
+    span.seaui-checkbox-box {
+      background: $disableBgColor !important;
+      border: 1px solid $disableBorderColor !important;
+      &::after {
+        border-color: $disableTextColor;
+      }
+    }
+  }
 }
 
-@keyframes seaCheckBoxEffect {
+@keyframes seaui-checkbox-effect {
   0% {
-    transform: rotate(-45deg) scale(0.5);
+    transform: translate(-50%, -70%) rotate(-45deg) scale(0.5);
   }
   100% {
-    transform: rotate(-45deg) scale(1);
+    transform: translate(-50%, -70%) rotate(-45deg) scale(1);
   }
 }
 
-@keyframes seaCheckBoxBorderEffect {
+@keyframes seaui-checkbox-border-effect {
   0% {
     transform: scale(1);
-    opacity: 1;
+    opacity: 0.6;
   }
   100% {
     transform: scale(1.2);
     opacity: 0;
+  }
+}
+
+@keyframes seaui-checkbox-unselected-effect {
+  0% {
+    transform: translate(-50%, -70%) rotate(-45deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -70%) rotate(-45deg) scale(0.1);
+    opacity: 0;
+  }
+}
+
+@each $name, $color in $colors {
+  @keyframes seaui-checkbox-unselected-span-#{$name}-effect {
+    0% {
+      background-color: $color;
+    }
+    100% {
+      border: 1px solid $blurBorderColor;
+      background-color: transparent;
+    }
   }
 }

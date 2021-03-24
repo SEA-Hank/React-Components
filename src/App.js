@@ -85,7 +85,10 @@ function App() {
         <CheckBox
           key="3"
           options={testdata2}
-          color={SeaUIColor.orange}
+          color={SeaUIColor.blue}
+          defaultValue={["001"]}
+          size={SeaUISize.Small}
+          disable={true}
         ></CheckBox>
       </div>
       <div style={{ marginTop: "50px" }}>

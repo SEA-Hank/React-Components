@@ -1,6 +1,7 @@
+import "./checkbox.scss";
 import { SeaUIBase } from "../_util/SeaUIBase";
 import PropTypes from "prop-types";
-import { SeaUIType, SeaUIColor } from "../_util/types";
+import { SeaUIType, SeaUIColor, SeaUISize } from "../_util/types";
 import { Option } from "./option";
 import { CheckBoxContext } from "./context";
 export class CheckBox extends SeaUIBase {
@@ -9,6 +10,7 @@ export class CheckBox extends SeaUIBase {
     this.state = {
       options: this.props.options,
       value: this.props.defaultValue,
+      effect: false,
     };
   }
 
@@ -21,7 +23,7 @@ export class CheckBox extends SeaUIBase {
     if (this.props.onchange != null) {
       this.props.onchange(this.state.value);
     }
-    this.setState({ value: this.state.value });
+    this.setState({ value: this.state.value, effect: true });
   };
 
   getOptions() {
@@ -30,7 +32,14 @@ export class CheckBox extends SeaUIBase {
     }
     let items = [];
     this.state.options.forEach((item, index) => {
-      items.push(<Option text={item.text} value={item.value} key={index} />);
+      items.push(
+        <Option
+          text={item.text}
+          value={item.value}
+          key={index}
+          disable={item.disable || false}
+        />
+      );
     });
     return items;
   }
@@ -42,12 +51,14 @@ export class CheckBox extends SeaUIBase {
           color: this.props.color,
           onchange: this.onchange,
           value: this.state.value,
-          // size: this.props.size,
-          // effect: this.state.effect,
-          // disable: this.props.disable,
+          size: this.props.size,
+          effect: this.state.effect,
+          disable: this.props.disable,
         }}
       >
-        <span className="seaui-checkbox">{this.getOptions()}</span>
+        <span className={this.getClassNames("seaui-checkbox", this.props.size)}>
+          {this.getOptions()}
+        </span>
       </CheckBoxContext.Provider>
     );
   }
@@ -65,6 +76,8 @@ CheckBox.propTypes = {
   color: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUIColor)),
   customClass: PropTypes.string,
   onchange: PropTypes.func,
+  size: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUISize)),
+  disable: PropTypes.bool,
 };
 
 CheckBox.defaultProps = {
@@ -73,4 +86,6 @@ CheckBox.defaultProps = {
   color: SeaUIColor.bule,
   customClass: "",
   onchange: null,
+  size: SeaUISize.Small,
+  disable: false,
 };

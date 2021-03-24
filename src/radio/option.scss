@@ -111,7 +111,7 @@ label.seaui-radio-option {
         border: 1px solid $disableBorderColor;
         background-color: $disableBgColor;
         &::after {
-          background: $disableBorderColor;
+          background: $disableTextColor;
         }
       }
     }

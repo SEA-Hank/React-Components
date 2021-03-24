@@ -1,0 +1,10 @@
+@import "../_util/SeauiBaseStyle.scss";
+span.seaui-checkbox {
+  display: inline-block;
+  @each $name, $sizeObj in $sizes {
+    &.seaui-size-#{$name} {
+      height: map-get($sizeObj, "height");
+      line-height: map-get($sizeObj, "height");
+    }
+  }
+}

@@ -1,1 +1,4 @@
-export { CheckBox } from "./checkbox";
+import { CheckBox } from "./checkbox";
+import { Option } from "./option";
+CheckBox.Option = Option;
+export { CheckBox };

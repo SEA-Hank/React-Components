@@ -1,7 +1,11 @@
 import "./checkbox.scss";
-import { SeaUIBase } from "../_util/SeaUIBase";
+import {
+  SeaUIBase,
+  SeaUIType,
+  SeaUIColor,
+  SeaUISize,
+} from "../_util/SeaUIBase";
 import PropTypes from "prop-types";
-import { SeaUIType, SeaUIColor, SeaUISize } from "../_util/types";
 import { Option } from "./option";
 import { CheckBoxContext } from "./context";
 export class CheckBox extends SeaUIBase {

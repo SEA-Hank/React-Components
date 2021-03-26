@@ -1,5 +1,5 @@
 @import "../_util/SeauiBaseStyle.scss";
-.seaSelectWrapper {
+.seaui-select-wrapper {
   text-align: center;
   padding: 0px 30px 0px 10px;
   border: 1px solid $blurBorderColor;
@@ -8,8 +8,14 @@
   position: relative;
   border-radius: 3px;
   outline: none;
-  height: 35px;
-  line-height: 35px;
+  > span {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
   &::after {
     position: absolute;
     display: block;
@@ -22,15 +28,21 @@
     top: 28%;
     right: 8px;
   }
-  .seaSelect-selectItemsWrapper {
+  @each $name, $sizeObj in $sizes {
+    &.seaui-size-#{$name} {
+      height: map-get($sizeObj, "height");
+      line-height: map-get($sizeObj, "height");
+      font-size: map-get($sizeObj, "fontSize");
+    }
+  }
+  .seaui-select-select-options-wrapper {
     line-height: normal;
     background-color: white;
     min-width: 100%;
     position: absolute;
-    //height: 150px;
     left: 0px;
     top: 120%;
-    padding: 10px 0px;
+    padding: 5px 0px;
     border-radius: 3px;
     box-shadow: 0px 3px 8px 0px $blurBorderColor;
     visibility: hidden;
@@ -38,34 +50,48 @@
     flex-direction: column;
     z-index: 999;
   }
-
-  &.seaSelectSelected {
-    &::after {
-      animation: seaSelect-SelectedEffect 0.3s ease-in-out;
-      animation-fill-mode: forwards;
-      top: 40%;
-      border-color: #0088ff;
-    }
-    .seaSelect-selectItemsWrapper {
-      visibility: visible;
-      animation: seaSelect-itemWrapperEffect 0.3s ease-in-out;
-      animation-fill-mode: forwards;
-    }
-    @each $name, $color in $colors {
-      &.seaui-color-#{$name} {
+  @each $name, $color in $colors {
+    &.seaui-color-#{$name} {
+      border-color: $color;
+      box-shadow: 0px 0px 5px $color;
+      //outline: 1px solid $color;
+      &::after {
         border-color: $color;
-        box-shadow: 0px 0px 5px $color;
-        //outline: 1px solid $color;
-
-        &::after {
-          border-color: $color;
-        }
       }
     }
   }
+  &.seaui-select-selecting {
+    &::after {
+      animation: seaui-select-selecting-effect 0.3s ease-in-out;
+      animation-fill-mode: forwards;
+      top: 40%;
+    }
+    .seaui-select-select-options-wrapper {
+      visibility: visible;
+      animation: seaui-select-options-wrapper-effect 0.3s ease-in-out;
+      animation-fill-mode: forwards;
+    }
+  }
+  &.seaui-select-after-selecting {
+    &::after {
+      animation: seaui-select-after-selecting-effect 0.3s ease-in-out;
+    }
+    .seaui-select-select-options-wrapper {
+      visibility: visible;
+      animation: seaui-select-options-wrapper-after-selecting-effect 0.3s
+        ease-in-out;
+      animation-fill-mode: forwards;
+    }
+  }
+  &.seaui-disable {
+    cursor: not-allowed;
+    color: $disableTextColor;
+    border-color: $disableBorderColor;
+    background-color: $disableBgColor;
+  }
 }
 
-@keyframes seaSelect-SelectedEffect {
+@keyframes seaui-select-selecting-effect {
   from {
     transform: rotate(45deg);
   }
@@ -74,7 +100,7 @@
   }
 }
 
-@keyframes seaSelect-itemWrapperEffect {
+@keyframes seaui-select-options-wrapper-effect {
   from {
     top: 60%;
     opacity: 0.1;
@@ -82,5 +108,28 @@
   to {
     opacity: 1;
     top: 120%;
+  }
+}
+
+@keyframes seaui-select-after-selecting-effect {
+  from {
+    transform: rotate(-135deg);
+    top: 40%;
+  }
+  to {
+    transform: rotate(45deg);
+    top: 28%;
+  }
+}
+
+@keyframes seaui-select-options-wrapper-after-selecting-effect {
+  from {
+    opacity: 0.8;
+    top: 120%;
+  }
+  to {
+    top: 60%;
+    opacity: 0;
+    visibility: hidden;
   }
 }

@@ -26,6 +26,11 @@ function App() {
     { text: "广州", value: "002", selected: false },
     { text: "上海", value: "003" },
   ];
+  let testdata4 = [
+    { text: "北京北京北京北京北京", value: "001", selected: true },
+    { text: "广州", value: "002", selected: false },
+    { text: "上海", value: "003", disable: true },
+  ];
 
   var handleClick = function (e) {
     console.log(this);
@@ -91,8 +96,24 @@ function App() {
           disable={true}
         ></CheckBox>
       </div>
+      <div id="dfdfdfdf" style={{ marginTop: "50px" }}>
+        <CheckBox
+          key="99"
+          color={SeaUIColor.blue}
+          defaultValue={["001"]}
+          size={SeaUISize.Small}
+        >
+          <CheckBox.Option text="测试" value="001" disable={true} />
+          <CheckBox.Option text="测试2" value="002" />
+          <CheckBox.Option text="测试3" value="003" />
+        </CheckBox>
+      </div>
       <div style={{ marginTop: "50px" }}>
-        <Select data={testdata3} color={SeaUIColor.red}></Select>
+        <Select
+          options={testdata4}
+          defaultValue={"001"}
+          color={SeaUIColor.red}
+        ></Select>
       </div>
       <div style={{ marginTop: "50px" }}>
         <Input

@@ -1,56 +1,67 @@
 import "./select.scss";
+import { SelectContext } from "./context";
 import PropTypes from "prop-types";
-import { SeaUIBase } from "../_util/SeaUIBase";
-import { SeaUIType, SeaUIColor } from "./selectTypes";
-import { TextItem } from "../selectItems/textItem";
+import {
+  SeaUIBase,
+  SeaUIType,
+  SeaUIColor,
+  SeaUISize,
+} from "../_util/SeaUIBase";
+import { Option } from "./option";
 import React from "react";
 export class Select extends SeaUIBase {
   constructor(props) {
     super(props, SeaUIType.SELECT);
-    let { data, text, value } = this.init();
-    this.state = { selected: false, data: data, text: text };
+    this.state = {
+      selecting: undefined,
+      text: this.getTextByValue(this.props.defaultValue),
+      value: this.props.defaultValue,
+    };
     this.wrapper = React.createRef();
   }
-  init = (selectedItem) => {
-    let data = this.state ? this.state.data : this.props.data;
 
-    let text = this.props.text;
-    let value = "";
-    data.map((ele) => {
-      if (selectedItem) {
-        ele.selected = ele.value === selectedItem.value;
+  getTextByValue = (val) => {
+    let resource = this.props.children || this.props.options;
+    let text = "";
+    resource.forEach((item) => {
+      var obj = item.props || item;
+      if (obj.value == val) {
+        text = obj.text;
+        return;
       }
-      if (ele.selected) {
-        text = ele.text;
-        value = ele.value;
-      }
-      return ele;
     });
-    return { data, text, value };
+    return text;
   };
 
-  callback = (selectedItem) => {
-    let { data, text, value } = this.init(selectedItem);
-    this.setState({ selected: false, data: data, text: text });
+  onchange = (val) => {
+    this.setState({
+      selecting: false,
+      value: val,
+      text: this.getTextByValue(val),
+    });
   };
 
-  uiClick = (event) => {
+  onClick = (event) => {
     event.stopPropagation();
     event.preventDefault();
-    this.setState({ selected: true });
+    if (!this.props.disable) {
+      this.setState({ selecting: true });
+    }
   };
 
   classNames = () => {
-    let names = this.getClassNames(
-      "seaSelectWrapper",
-      this.state.selected ? "seaSelectSelected" : "",
-      this.props.color
-    );
-    return names;
+    return this.getClassNames("seaui-select-wrapper", this.props.size, {
+      [this.props.color]: this.state.selecting,
+      "seaui-select-selecting":
+        this.state.selecting == null ? false : this.state.selecting,
+      "seaui-select-after-selecting":
+        this.state.selecting == null ? false : !this.state.selecting,
+      "seaui-disable": this.props.disable,
+    });
   };
 
   onBlur = () => {
-    this.setState({ selected: false });
+    this.setState({ selecting: false });
   };
 
   onAnimationEnd = () => {
@@ -58,15 +69,17 @@ export class Select extends SeaUIBase {
   };
 
   getOptions = () => {
+    if (this.props.children != null) {
+      return this.props.children;
+    }
     let options = [];
-    this.state.data.forEach((element) => {
+    this.props.options.forEach((element, index) => {
       options.push(
-        <TextItem
+        <Option
           text={element.text}
           value={element.value}
-          selected={element.selected || false}
-          callback={this.callback}
-          color={this.props.color}
+          key={index}
+          disable={element.disable || this.props.disable}
         />
       );
     });
@@ -75,30 +88,51 @@ export class Select extends SeaUIBase {
 
   render() {
     return (
-      <div className={this.classNames()} onClick={this.uiClick}>
-        {this.state.text}
+      <SelectContext.Provider
+        value={{
+          onchange: this.onchange,
+          color: this.props.color,
+          value: this.state.value,
+          disable: this.props.disable,
+        }}
+      >
         <div
-          ref={this.wrapper}
-          tabIndex="-1"
-          onAnimationEnd={this.onAnimationEnd}
-          onBlur={this.onBlur}
-          className="seaSelect-selectItemsWrapper"
+          style={{ width: this.props.width }}
+          className={this.classNames()}
+          onClick={this.onClick}
         >
-          {this.getOptions()}
+          <span>{this.state.text}</span>
+          <div
+            ref={this.wrapper}
+            tabIndex="-1"
+            onAnimationEnd={this.onAnimationEnd}
+            onBlur={this.onBlur}
+            className="seaui-select-select-options-wrapper"
+          >
+            {this.getOptions()}
+          </div>
         </div>
-      </div>
+      </SelectContext.Provider>
     );
   }
 }
 
 Select.propTypes = {
   color: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUIColor)),
-  data: PropTypes.array.isRequired,
-  defaultText: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  defaultValue: PropTypes.string,
+  onchange: PropTypes.func,
+  size: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUISize)),
+  disable: PropTypes.bool,
+  width: PropTypes.string,
 };
 
 Select.defaultProps = {
   color: SeaUIColor.blue,
-  data: [],
-  defaultText: "chose an option",
+  options: [],
+  defaultValue: "",
+  onchange: null,
+  size: SeaUISize.Small,
+  disable: false,
+  width: "100px",
 };

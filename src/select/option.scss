@@ -1,17 +1,22 @@
 @import "../_util/SeauiBaseStyle.scss";
-label.seaTextItem {
+label.seaui-select-option {
   padding: 5px 10px;
   min-width: 100%;
   cursor: pointer;
   &:hover {
     background-color: $blurBorderColor;
   }
-  &.seaTextItemSelected {
+  &.seaui-select-option-selected {
     color: white;
     @each $name, $color in $colors {
       &.seaui-color-#{$name} {
         background-color: $color;
       }
     }
+  }
+  &.seaui-disable {
+    color: $disableTextColor;
+    background-color: $disableBgColor;
+    cursor: not-allowed;
   }
 }

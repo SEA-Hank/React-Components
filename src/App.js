@@ -36,7 +36,14 @@ function App() {
     console.log(this);
     console.log("i am at the parent class");
   };
-  let after = <Select data={testdata3} color={SeaUIColor.red}></Select>;
+  let after = (
+    <Select
+      options={testdata4}
+      defaultValue={"001"}
+      color={SeaUIColor.red}
+      size={SeaUISize.Small}
+    ></Select>
+  );
   return (
     <div className="App">
       <div style={{ marginTop: "50px" }}>

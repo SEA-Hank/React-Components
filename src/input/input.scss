@@ -7,52 +7,59 @@
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
-div.seauiInput {
+div.seaui-input {
   display: inline-block;
-  height: 35px;
-  line-height: 35px;
-  span {
+  @each $name, $sizeObj in $sizes {
+    &.seaui-size-#{$name} {
+      line-height: map-get($sizeObj, "height");
+      height: map-get($sizeObj, "height");
+      font-size: map-get($sizeObj, "fontSize");
+    }
+  }
+  > span {
     height: inherit;
     display: inline-block;
     vertical-align: middle;
   }
-  span.labelWrapper {
+  span.seaui-input-label-wrapper {
     background-color: #fafafa;
     border: 1px solid $blurBorderColor;
-    &.labelText {
-      padding: 0px 10px;
-      &.forward {
-        @extend %leftRadius;
-      }
-      &.behind {
-        @extend %rightRadius;
-      }
+    &.seaui-input-label-position-forward {
+      border-right: none;
+      @extend %leftRadius;
     }
-    &.labelObject {
-      border: none;
-      & > * {
-        border-radius: 0px;
+    &.seaui-input-label-position-behind {
+      border-left: none;
+      @extend %rightRadius;
+    }
+    &.seaui-input-text-label {
+      padding: 0px 10px;
+    }
+    &.seaui-input-object-label {
+      > * {
+        z-index: 900;
+        vertical-align: top;
       }
-      &.forward {
-        & > * {
-          @extend %leftRadius;
+      border: none;
+      &.seaui-input-label-position-behind {
+        margin-left: -1px;
+        > * {
+          border-top-left-radius: 0px;
+          border-bottom-left-radius: 0px;
         }
       }
-      &.behind {
-        & > * {
-          @extend %rightRadius;
+      &.seaui-input-label-position-forward {
+        margin-right: -1px;
+        > * {
+          border-top-right-radius: 0px;
+          border-bottom-right-radius: 0px;
         }
       }
     }
   }
 
-  span.inputWrapper {
-    margin-left: -1px;
-    margin-right: -1px;
-    border-top: 1px solid $blurBorderColor;
-    border-bottom: 1px solid $blurBorderColor;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
+  span.seaui-input-wrapper {
+    border: 1px solid $blurBorderColor;
     display: inline-block;
     position: relative;
     padding: 0px 10px;
@@ -67,33 +74,27 @@ div.seauiInput {
           width: 20px;
           color: $color;
         }
-        &.focus {
+        &.seaui-input-onfocus {
           box-shadow: 0px 0px 5px $color;
           border: 1px solid $color;
+          z-index: 910;
+          i.seaui-input-display-btn {
+            visibility: visible;
+          }
         }
       }
     }
     i {
       position: relative;
       vertical-align: middle;
-
       cursor: pointer;
       visibility: hidden;
     }
-    &.leftBorder {
-      border-left: 1px solid $blurBorderColor;
+    &.seaui-input-left-border {
       @extend %leftRadius;
-      margin-left: 0px;
     }
-    &.rightBorder {
-      border-right: 1px solid $blurBorderColor;
+    &.seaui-input-right-border {
       @extend %rightRadius;
-      margin-right: 0px;
-    }
-    &.focus {
-      i.showDelBtn {
-        visibility: visible;
-      }
     }
   }
 }

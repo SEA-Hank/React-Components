@@ -1,15 +1,19 @@
 import "./input.scss";
 import PropTypes from "prop-types";
-import { SeaUIBase } from "../_util/SeaUIBase";
-import { SeaUIType, SeaUIColor } from "../_util/types";
+import {
+  SeaUIBase,
+  SeaUISize,
+  SeaUIType,
+  SeaUIColor,
+} from "../_util/SeaUIBase";
 import React from "react";
 export class Input extends SeaUIBase {
   constructor(props, uiType) {
     super(props, uiType || SeaUIType.INPUT);
     this.wrapper = React.createRef();
     this.state = {
-      isFocus: false,
-      value: this.props.defaultText,
+      isOnFocus: false,
+      value: this.props.defaultValue,
     };
   }
 
@@ -22,12 +26,12 @@ export class Input extends SeaUIBase {
   };
 
   onFocus = (e) => {
-    this.setState({ isFocus: true });
+    this.setState({ isOnFocus: true });
   };
 
   onBlur = (e) => {
     if (!this.wrapper.current.contains(e.relatedTarget)) {
-      this.setState({ isFocus: false });
+      this.setState({ isOnFocus: false });
     }
   };
 
@@ -38,11 +42,11 @@ export class Input extends SeaUIBase {
       let eleType = typeof ele;
       return (
         <span
-          className={this.getClassNames("labelWrapper", {
-            labelObject: !(eleType === "string"),
-            labelText: eleType === "string",
-            forward: position === "forward",
-            behind: !(position === "forward"),
+          className={this.getClassNames("seaui-input-label-wrapper", {
+            "seaui-input-object-label": !(eleType === "string"),
+            "seaui-input-text-label": eleType === "string",
+            "seaui-input-label-position-forward": position === "forward",
+            "seaui-input-label-position-behind": !(position === "forward"),
           })}
         >
           {ele}
@@ -61,7 +65,7 @@ export class Input extends SeaUIBase {
     if (this.props.isShowBtn) {
       let btnAttrs = {
         class: this.getClassNames("far", this.props.btnLogo, {
-          showDelBtn: this.state.value.length != 0,
+          "seaui-input-display-btn": this.state.value.length != 0,
         }),
         onClick: this.props.btnOnClick || this.btnOnClick,
       };
@@ -81,11 +85,11 @@ export class Input extends SeaUIBase {
       onBlur: this.onBlur,
       tabIndex: "-1",
       className: this.getClassNames(
-        "inputWrapper",
-        this.state.isFocus ? "focus" : "",
+        "seaui-input-wrapper",
         {
-          leftBorder: addonBefore == null,
-          rightBorder: addonAfter == null,
+          "seaui-input-onfocus": this.state.isOnFocus,
+          "seaui-input-left-border": addonBefore == null,
+          "seaui-input-right-border": addonAfter == null,
         },
         this.props.color
       ),
@@ -99,9 +103,11 @@ export class Input extends SeaUIBase {
       value: this.state.value,
     };
 
-    let classNames = this.getClassNames("seauiInput", {
-      [this.props.customClassNames]: Boolean(this.props.customClassNames),
-    });
+    let classNames = this.getClassNames(
+      "seaui-input",
+      this.props.size,
+      this.props.customClassNames
+    );
     return (
       <div className={classNames}>
         {addonBefore}
@@ -117,7 +123,7 @@ export class Input extends SeaUIBase {
 
 Input.propTypes = {
   color: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUIColor)),
-  defaultText: PropTypes.string,
+  defaultValue: PropTypes.string,
   numberFormat: PropTypes.string,
   maxLength: PropTypes.number,
   isShowBtn: PropTypes.bool,
@@ -129,11 +135,12 @@ Input.propTypes = {
   customClassNames: PropTypes.string,
   addonAfter: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   addonBefore: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  size: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUISize)),
 };
 
 Input.defaultProps = {
   color: SeaUIColor.blue,
-  defaultText: "",
+  defaultValue: "",
   numberFormat: "",
   maxLength: 0,
   isShowBtn: true,
@@ -145,4 +152,5 @@ Input.defaultProps = {
   customClassNames: "",
   addonBefore: null,
   addonAfter: null,
+  size: SeaUISize.Small,
 };

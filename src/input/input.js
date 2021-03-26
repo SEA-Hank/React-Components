@@ -26,7 +26,9 @@ export class Input extends SeaUIBase {
   };
 
   onFocus = (e) => {
-    this.setState({ isOnFocus: true });
+    if (!this.props.disable) {
+      this.setState({ isOnFocus: true });
+    }
   };
 
   onBlur = (e) => {
@@ -90,6 +92,7 @@ export class Input extends SeaUIBase {
           "seaui-input-onfocus": this.state.isOnFocus,
           "seaui-input-left-border": addonBefore == null,
           "seaui-input-right-border": addonAfter == null,
+          "seaui-disable": this.props.disable,
         },
         this.props.color
       ),
@@ -101,11 +104,12 @@ export class Input extends SeaUIBase {
       onChange: this.onChange,
       type: this.props.inputHtmlType,
       value: this.state.value,
+      disabled: this.props.disable ? "disabled" : "",
     };
-
     let classNames = this.getClassNames(
       "seaui-input",
       this.props.size,
+      { "seaui-disable": this.props.disable },
       this.props.customClassNames
     );
     return (
@@ -136,6 +140,7 @@ Input.propTypes = {
   addonAfter: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   addonBefore: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   size: PropTypes.oneOf(SeaUIBase.objctToArray(SeaUISize)),
+  disable: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -153,4 +158,5 @@ Input.defaultProps = {
   addonBefore: null,
   addonAfter: null,
   size: SeaUISize.Small,
+  disable: false,
 };

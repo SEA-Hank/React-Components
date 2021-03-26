@@ -97,4 +97,22 @@ div.seaui-input {
       @extend %rightRadius;
     }
   }
+  &.seaui-disable {
+    span.seaui-input-wrapper {
+      cursor: not-allowed;
+      background-color: $disableBgColor;
+      color: $disableTextColor;
+      input {
+        background-color: $disableBgColor;
+        color: $disableTextColor;
+        cursor: not-allowed;
+      }
+    }
+    span.seaui-input-label-wrapper {
+      &.seaui-input-text-label {
+        background-color: $disableBgColor;
+        color: $disableTextColor;
+      }
+    }
+  }
 }

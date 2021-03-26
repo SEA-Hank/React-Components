@@ -128,6 +128,8 @@ function App() {
           addonBefore="http://"
           color={SeaUIColor.red}
           addonAfter={after}
+          disable={false}
+          defaultValue={"test"}
         ></Input>
       </div>
       <div style={{ marginTop: "50px" }}>

@@ -18,9 +18,9 @@ export class Option extends SeaUIBase {
       color,
       {
         "seaui-disable": disable || this.props.disable,
-        "seaui-radio-option-selected": value == this.state.value,
+        "seaui-radio-option-selected": value === this.state.value,
         "seaui-radio-option-selected-effect":
-          value == this.state.value && effect,
+          value === this.state.value && effect,
       },
       this.props.customClass
     );

@@ -1,6 +1,5 @@
 import { Input } from "./input";
 import { SeaUIType } from "../_util/types";
-import PropTypes from "prop-types";
 import { SeaUIBase } from "../_util/SeaUIBase";
 export class Password extends SeaUIBase {
   constructor(props) {

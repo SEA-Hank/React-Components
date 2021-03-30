@@ -1,5 +1,6 @@
 @import "../_util/SeauiBaseStyle.scss";
-.seaui-select-wrapper {
+.seaui-select-wrapper.seaui-select-wrapper {
+  @extend %reset-css;
   text-align: center;
   padding: 0px 30px 0px 10px;
   border: 1px solid $blurBorderColor;

@@ -1,5 +1,6 @@
 @import "../_util/SeauiBaseStyle.scss";
-span.seaui-checkbox {
+div.seaui-checkbox {
+  @extend %reset-css;
   display: inline-block;
   @each $name, $sizeObj in $sizes {
     &.seaui-size-#{$name} {

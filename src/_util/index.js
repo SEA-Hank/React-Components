@@ -1,13 +1,13 @@
-import { Input } from "../input/input";
+export { Input } from "../input";
 
 export { Button } from "../button";
 
 export { Radio } from "../radio";
 
-export * from "../checkbox";
+export { CheckBox } from "../checkbox";
 
-export * from "../select";
+export { Select } from "../select";
 
-export * from "../input";
+export { Switch } from "../switch";
 
 export { SeaUIColor, SeaUISize } from "./types";

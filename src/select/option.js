@@ -1,10 +1,5 @@
 import "./option.scss";
-import {
-  SeaUIType,
-  SeaUIColor,
-  SeaUISize,
-  SeaUIBase,
-} from "../_util/SeaUIBase";
+import { SeaUIType, SeaUIBase } from "../_util/SeaUIBase";
 import { SelectContext } from "./context";
 import PropTypes from "prop-types";
 export class Option extends SeaUIBase {
@@ -15,8 +10,7 @@ export class Option extends SeaUIBase {
   }
 
   className() {
-    let { color, value, disable } = this.context;
-    console.log("test");
+    let { color, value } = this.context;
     return this.getClassNames(
       "seaui-select-option",
       { "seaui-select-option-selected": value === this.state.value },

@@ -1,6 +1,7 @@
 @import "../_util/SeauiBaseStyle.scss";
 
-label.seaui-radio-option {
+label.seaui-radio-option.seaui-radio-option {
+  @extend %reset-css;
   margin-left: 10px;
   font-size: inherit;
   cursor: pointer;

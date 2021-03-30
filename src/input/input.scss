@@ -8,6 +8,7 @@
   border-bottom-right-radius: 3px;
 }
 div.seaui-input {
+  @extend %reset-css;
   display: inline-block;
   @each $name, $sizeObj in $sizes {
     &.seaui-size-#{$name} {

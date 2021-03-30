@@ -1,5 +1,4 @@
 import React from "react";
-import "./css-reset.css";
 
 export { SeaUIType, SeaUIColor, SeaUISize } from "./types";
 export class SeaUIBase extends React.Component {
@@ -9,9 +8,9 @@ export class SeaUIBase extends React.Component {
     this.uiID = new Date().getTime();
   }
 
-  getValue() {
+  getValue = () => {
     return this.state.value;
-  }
+  };
 
   getClassNames = function (...args) {
     let classes = [];

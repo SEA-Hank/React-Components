@@ -16,7 +16,7 @@ export class ButtonOption extends SeaUIBase {
       {
         "seaui-disable": disable || this.props.disable,
         "seaui-disable-radio-all-disable": disable,
-        "seaui-radio-buttonoption-selected": value == this.state.value,
+        "seaui-radio-buttonoption-selected": value === this.state.value,
       },
       this.props.customClass
     );

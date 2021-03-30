@@ -1,6 +1,7 @@
 @import "../_util/SeauiBaseStyle.scss";
 
 button.seaui-button {
+  @extend %reset-css;
   cursor: pointer;
   outline: none;
   color: white;

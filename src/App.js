@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 import "./App.css";
 import {
   Button,
@@ -6,6 +7,7 @@ import {
   CheckBox,
   Select,
   Input,
+  Switch,
   SeaUISize,
 } from "./_util";
 function App() {
@@ -33,9 +35,12 @@ function App() {
   ];
 
   var handleClick = function (e) {
-    console.log(this);
     console.log("i am at the parent class");
+    console.log(refContainer);
   };
+
+  const refContainer = React.createRef();
+
   let after = (
     <Select
       options={testdata4}
@@ -165,6 +170,9 @@ function App() {
             />
           }
         ></Input.Password>
+      </div>
+      <div style={{ marginTop: "50px" }}>
+        <Switch kk="111"></Switch>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 @import "../_util/SeauiBaseStyle.scss";
 label.seaui-select-option {
+  @extend %reset-css;
   padding: 5px 10px;
   min-width: 100%;
   cursor: pointer;

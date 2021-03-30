@@ -1,6 +1,7 @@
 @import "../_util/SeauiBaseStyle.scss";
 
 label.seaui-checkBox-option {
+  @extend %reset-css;
   cursor: pointer;
   display: inline-block;
   margin-left: 10px;

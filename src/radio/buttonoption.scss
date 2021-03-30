@@ -1,5 +1,6 @@
 @import "../_util/SeauiBaseStyle.scss";
 label.seaui-radio-buttonoption {
+  @extend %reset-css;
   padding: 0px 10px;
   height: inherit;
   display: inline-block;
@@ -9,6 +10,7 @@ label.seaui-radio-buttonoption {
   border-top-width: 1px;
   border-bottom-width: 1px;
   border-left-width: 1px;
+  border-right-width: 0px;
   @each $name, $color in $colors {
     &.seaui-color-#{$name} {
       border-color: $color;

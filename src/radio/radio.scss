@@ -1,6 +1,7 @@
 @import "../_util/SeauiBaseStyle.scss";
 
 div.seaui-radio-wrapper {
+  @extend %reset-css;
   display: inline-block;
   @each $name, $sizeObj in $sizes {
     &.seaui-size-#{$name} {

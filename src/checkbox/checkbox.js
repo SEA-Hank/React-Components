@@ -20,18 +20,18 @@ export class CheckBox extends SeaUIBase {
 
   onchange = (itemValue, isSelected) => {
     if (isSelected) {
-      this.state.value = this.state.value.filter((item) => item != itemValue);
+      this.state.value = this.state.value.filter((item) => item !== itemValue);
     } else {
       this.state.value.push(itemValue);
     }
-    if (this.props.onchange != null) {
+    if (this.props.onchange !== null) {
       this.props.onchange(this.state.value);
     }
     this.setState({ value: this.state.value, effect: true });
   };
 
   getOptions() {
-    if (this.props.children != null) {
+    if (this.props.children !== null) {
       return this.props.children;
     }
     let items = [];
@@ -60,9 +60,9 @@ export class CheckBox extends SeaUIBase {
           disable: this.props.disable,
         }}
       >
-        <span className={this.getClassNames("seaui-checkbox", this.props.size)}>
+        <div className={this.getClassNames("seaui-checkbox", this.props.size)}>
           {this.getOptions()}
-        </span>
+        </div>
       </CheckBoxContext.Provider>
     );
   }

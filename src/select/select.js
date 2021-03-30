@@ -25,7 +25,7 @@ export class Select extends SeaUIBase {
     let text = "";
     resource.forEach((item) => {
       var obj = item.props || item;
-      if (obj.value == val) {
+      if (obj.value === val) {
         text = obj.text;
         return;
       }

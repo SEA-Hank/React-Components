@@ -1,0 +1,54 @@
+@import "../_util/SeauiBaseStyle.scss";
+
+button.seaui-switch {
+  @extend %reset-css;
+  font-size: 14px;
+  height: 24px;
+  background-color: $disableTextColor;
+  border: none;
+  border-radius: 24px;
+  padding: 0px 15px;
+  position: relative;
+  cursor: pointer;
+  div {
+    height: 20px;
+    width: 20px;
+    background-color: white;
+    border-radius: 24px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    animation-fill-mode: forwards !important;
+    transition: left 0.3s;
+  }
+  span {
+    position: relative;
+    display: block;
+    color: white;
+    top: 0px;
+    bottom: 0px;
+    left: 9px;
+    line-height: 25px;
+    font-size: 16px;
+    transition: left 0.3s;
+  }
+  &.seaui-switch-checked {
+    background-color: #0088ff;
+    div {
+      left: calc(100% - 22px);
+      //animation: seaui-switch-checked-effect 0.3s ease-in-out;
+    }
+    span {
+      left: -8px;
+    }
+  }
+}
+
+@keyframes seaui-switch-checked-effect {
+  from {
+    left: calc(2px);
+  }
+  to {
+    left: calc(100% - 22px);
+  }
+}

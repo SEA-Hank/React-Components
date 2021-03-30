@@ -39,7 +39,7 @@ export class Input extends SeaUIBase {
 
   getLableEle = (position) => {
     let ele =
-      position == "forward" ? this.props.addonBefore : this.props.addonAfter;
+      position === "forward" ? this.props.addonBefore : this.props.addonAfter;
     if (ele) {
       let eleType = typeof ele;
       return (
@@ -67,7 +67,7 @@ export class Input extends SeaUIBase {
     if (this.props.isShowBtn) {
       let btnAttrs = {
         class: this.getClassNames("far", this.props.btnLogo, {
-          "seaui-input-display-btn": this.state.value.length != 0,
+          "seaui-input-display-btn": this.state.value.length !== 0,
         }),
         onClick: this.props.btnOnClick || this.btnOnClick,
       };
@@ -90,8 +90,8 @@ export class Input extends SeaUIBase {
         "seaui-input-wrapper",
         {
           "seaui-input-onfocus": this.state.isOnFocus,
-          "seaui-input-left-border": addonBefore == null,
-          "seaui-input-right-border": addonAfter == null,
+          "seaui-input-left-border": addonBefore === null,
+          "seaui-input-right-border": addonAfter === null,
           "seaui-disable": this.props.disable,
         },
         this.props.color
@@ -99,7 +99,7 @@ export class Input extends SeaUIBase {
     };
 
     let inputAttrs = {
-      maxLength: this.props.maxLength == 0 ? null : this.props.maxLength,
+      maxLength: this.props.maxLength === 0 ? null : this.props.maxLength,
       onKeyDown: this.props.onKeyDown,
       onChange: this.onChange,
       type: this.props.inputHtmlType,

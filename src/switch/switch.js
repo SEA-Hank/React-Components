@@ -1,4 +1,6 @@
 import React, { useState, useImperativeHandle } from "react";
+import { SeaUIColor, SeaUISize } from "../_util/SeaUIBase";
+import { useClassNames } from "../_util/hooks/useClassNames";
 import PropTypes from "prop-types";
 import "./switch.scss";
 function Switch(props, ref) {
@@ -6,6 +8,9 @@ function Switch(props, ref) {
   const [text, setText] = useState(
     props.defaultChecked ? props.checkedText : props.unCheckText
   );
+  const buttonClasses = useClassNames("seaui-switch", props.size, props.color, {
+    "seaui-switch-checked": props.defaultChecked,
+  });
 
   useImperativeHandle(ref, () => ({
     focus: () => {
@@ -14,17 +19,22 @@ function Switch(props, ref) {
   }));
 
   const onclick = () => {
-    setText(checked ? props.unCheckText : props.checkedText);
+    setText(!checked ? props.checkedText : props.unCheckText);
+    buttonClasses.change(
+      "seaui-switch",
+      props.size,
+      {
+        "seaui-switch-checked": !checked,
+        "seaui-switch-checked-effect": !checked,
+        "seaui-switch-uncheck-effect": checked,
+      },
+      props.color
+    );
     setChecked((checked) => !checked);
   };
 
-  const getClassNames = () => {
-    console.log(checked);
-    return "seaui-switch" + (checked ? " seaui-switch-checked" : "");
-  };
-
   return (
-    <button className={getClassNames()} onClick={onclick}>
+    <button className={buttonClasses.classes} onClick={onclick}>
       <div></div>
       <span>{text}</span>
     </button>
@@ -36,10 +46,14 @@ Switch.propTypes = {
   defaultChecked: PropTypes.bool,
   checkedText: PropTypes.string,
   unCheckText: PropTypes.string,
+  color: PropTypes.string,
+  size: PropTypes.string,
 };
 Switch.defaultProps = {
-  defaultChecked: true,
+  defaultChecked: false,
   checkedText: "开启",
   unCheckText: "关闭",
+  color: SeaUIColor.red,
+  size: SeaUISize.Small,
 };
 export { Switch };

@@ -2,19 +2,53 @@
 
 button.seaui-switch {
   @extend %reset-css;
-  font-size: 14px;
-  height: 24px;
   background-color: $disableTextColor;
   border: none;
-  border-radius: 24px;
-  padding: 0px 15px;
   position: relative;
   cursor: pointer;
+  @each $name, $sizeObj in $sizes {
+    &.seaui-size-#{$name} {
+      padding: 0px #{map-get($sizeObj, "fontSize") + 2}; //
+      height: map-get($sizeObj, "height")-6;
+      border-radius: map-get($sizeObj, "height")-6;
+      font-size: map-get($sizeObj, "fontSize");
+      &::before {
+        border-radius: map-get($sizeObj, "height")-6;
+      }
+      div {
+        border-radius: map-get($sizeObj, "height")-6;
+        height: map-get($sizeObj, "height")-10;
+        width: map-get($sizeObj, "height")-10;
+      }
+      span {
+        font-size: map-get($sizeObj, "fontSize");
+        line-height: map-get($sizeObj, "height")-5;
+        left: map-get($sizeObj, "fontSize")-5;
+      }
+      &.seaui-switch-checked {
+        div {
+          left: calc(100% - #{map-get($sizeObj, "height")-8});
+        }
+        span {
+          left: -#{map-get($sizeObj, "fontSize")-5};
+        }
+      }
+    }
+  }
+  &::before {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    top: 0px;
+    left: 0px;
+    transform: scalex(1.1) scaleY(1.3);
+    top: -1px;
+    opacity: 0;
+  }
   div {
-    height: 20px;
-    width: 20px;
     background-color: white;
-    border-radius: 24px;
     position: absolute;
     top: 2px;
     left: 2px;
@@ -23,32 +57,70 @@ button.seaui-switch {
   }
   span {
     position: relative;
+    min-width: 20px;
     display: block;
     color: white;
     top: 0px;
     bottom: 0px;
-    left: 9px;
-    line-height: 25px;
-    font-size: 16px;
     transition: left 0.3s;
   }
   &.seaui-switch-checked {
-    background-color: #0088ff;
-    div {
-      left: calc(100% - 22px);
-      //animation: seaui-switch-checked-effect 0.3s ease-in-out;
+    @each $name, $color in $colors {
+      &.seaui-color-#{$name} {
+        background-color: $color;
+        &::before {
+          background-color: $color;
+          border: 1px solid $color;
+        }
+      }
     }
-    span {
-      left: -8px;
+    &.seaui-switch-checked-effect {
+      &::before {
+        animation: seaui-switch-checked-effect 0.3s ease-in-out;
+      }
+    }
+  }
+  &.seaui-switch-uncheck-effect {
+    &::before {
+      background-color: $disableTextColor;
+      border: 1px solid $disableTextColor;
+      animation: seaui-switch-unChecked-effect 0.3s ease-in-out;
     }
   }
 }
 
 @keyframes seaui-switch-checked-effect {
-  from {
-    left: calc(2px);
+  0% {
+    opacity: 0;
   }
-  to {
-    left: calc(100% - 22px);
+  25% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  75% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes seaui-switch-unChecked-effect {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  75% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
   }
 }

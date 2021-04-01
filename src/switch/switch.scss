@@ -87,6 +87,9 @@ button.seaui-switch {
       animation: seaui-switch-unChecked-effect 0.3s ease-in-out;
     }
   }
+  &.seaui-disable {
+    cursor: not-allowed;
+  }
 }
 
 @keyframes seaui-switch-checked-effect {

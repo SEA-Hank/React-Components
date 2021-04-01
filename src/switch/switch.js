@@ -10,6 +10,7 @@ function Switch(props, ref) {
   );
   const buttonClasses = useClassNames("seaui-switch", props.size, props.color, {
     "seaui-switch-checked": props.defaultChecked,
+    "seaui-disable": props.disable,
   });
 
   useImperativeHandle(ref, () => ({
@@ -28,13 +29,17 @@ function Switch(props, ref) {
         "seaui-switch-checked-effect": !checked,
         "seaui-switch-uncheck-effect": checked,
       },
-      props.color
+      props.color,
+      { "seaui-disable": props.disable }
     );
     setChecked((checked) => !checked);
   };
 
   return (
-    <button className={buttonClasses.classes} onClick={onclick}>
+    <button
+      className={buttonClasses.classes}
+      onClick={!props.disable ? onclick : null}
+    >
       <div></div>
       <span>{text}</span>
     </button>
@@ -48,12 +53,14 @@ Switch.propTypes = {
   unCheckText: PropTypes.string,
   color: PropTypes.string,
   size: PropTypes.string,
+  disable: PropTypes.bool,
 };
 Switch.defaultProps = {
-  defaultChecked: false,
+  defaultChecked: true,
   checkedText: "开启",
   unCheckText: "关闭",
   color: SeaUIColor.red,
   size: SeaUISize.Small,
+  disable: false,
 };
 export { Switch };

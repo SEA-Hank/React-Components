@@ -74,7 +74,12 @@ function App() {
         />
       </div>
       <div style={{ marginTop: "50px" }}>
-        <Radio data={testdata} color={SeaUIColor.grey} key="1">
+        <Radio
+          data={testdata}
+          defaultValue="广州"
+          color={SeaUIColor.grey}
+          key="1"
+        >
           <Radio.ButtonOption
             text="佛山"
             value="佛山"

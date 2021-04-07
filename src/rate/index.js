@@ -3,21 +3,31 @@ import { SeaUIColor, SeaUISize } from "../_util/SeaUIBase";
 import { Option } from "./option";
 import { RateContext } from "./context";
 import PropTypes from "prop-types";
+import { useClassNames } from "../_util/hooks/useClassNames";
 import "./rate.scss";
 function Rate(props) {
   const [rateValue, setRateValue] = useState(props.defaultValue);
 
   const [temporary, SetTemporary] = useState(props.defaultValue);
 
+  const classnames = useClassNames(
+    "seaui-rate-wrapper",
+    props.size,
+    props.color
+  );
+
   const options = [];
   for (let index = 1; index <= props.quantity; index++) {
-    options.push(<Option index={index}></Option>);
+    options.push(<Option key={index} index={index}></Option>);
   }
 
   const onChange = (ishover, value) => {
     SetTemporary(value);
     if (!ishover) {
       setRateValue(value);
+      if (props.onChange) {
+        props.onChange(value);
+      }
     }
   };
 
@@ -27,7 +37,7 @@ function Rate(props) {
 
   return (
     <RateContext.Provider value={{ tempValue: temporary, onChange: onChange }}>
-      <div className="seaui-rate-wrapper" onMouseLeave={onMouseLeave}>
+      <div className={classnames.classes} onMouseLeave={onMouseLeave}>
         <ul>{options}</ul>
       </div>
     </RateContext.Provider>

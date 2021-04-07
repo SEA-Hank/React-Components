@@ -26,6 +26,7 @@ export const SeaUIColor = {
   grey: "seaui-color-grey",
   red: "seaui-color-red",
   orange: "seaui-color-orange",
+  yellow: "seaui-color-yellow",
 };
 
 export const SeaUISize = {

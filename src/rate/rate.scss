@@ -2,8 +2,71 @@
 div.seaui-rate-wrapper {
   @extend %reset-css;
   display: inline-block;
+  @each $name, $sizeObj in $sizes {
+    &.seaui-size-#{$name} {
+      ul {
+        height: map-get($sizeObj, "height");
+        li {
+          .seaui-rate-item-wrapper {
+            width: map-get($sizeObj, "fontSize") + 4;
+            height: map-get($sizeObj, "fontSize") + 4;
+            .seaui-rate-item-left {
+              svg {
+                width: map-get($sizeObj, "fontSize") + 4;
+                height: map-get($sizeObj, "fontSize") + 4;
+              }
+            }
+            .seaui-rate-itme-right {
+              svg {
+                width: map-get($sizeObj, "fontSize") + 4;
+                height: map-get($sizeObj, "fontSize") + 4;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  @each $name, $color in $colors {
+    &.seaui-color-#{$name} {
+      ul {
+        li {
+          .seaui-rate-item-wrapper {
+            .seaui-rate-item-left {
+              svg {
+                stroke: $color;
+              }
+            }
+            .seaui-rate-itme-right {
+              svg {
+                stroke: $color;
+              }
+            }
+            &.seaui-rate-item-whole-star {
+              .seaui-rate-item-left {
+                svg {
+                  fill: $color;
+                }
+              }
+              .seaui-rate-itme-right {
+                svg {
+                  fill: $color;
+                }
+              }
+            }
+            &.seaui-rate-item-half-star {
+              .seaui-rate-item-left {
+                svg {
+                  fill: $color;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   ul {
-    height: 30px;
     display: inline-flex;
     flex-direction: row;
     cursor: pointer;
@@ -12,8 +75,6 @@ div.seaui-rate-wrapper {
     li {
       list-style: none;
       .seaui-rate-item-wrapper {
-        width: 18px;
-        height: 18px;
         display: flex;
         flex-direction: row;
         .seaui-rate-item-left {
@@ -22,10 +83,7 @@ div.seaui-rate-wrapper {
           width: 50%;
           overflow: hidden;
           svg {
-            width: 18px;
-            height: 18px;
             fill: white;
-            stroke: #fadb14;
             stroke-width: 3px;
             vertical-align: top;
           }
@@ -37,9 +95,6 @@ div.seaui-rate-wrapper {
           overflow: hidden;
           svg {
             vertical-align: top;
-            width: 18px;
-            height: 18px;
-            stroke: #fadb14;
             stroke-width: 3px;
             fill: white;
             transform: translateX(-50%);
@@ -47,27 +102,12 @@ div.seaui-rate-wrapper {
         }
         &.seaui-rate-item-whole-star {
           transform: scale(1.2);
-          .seaui-rate-item-left {
-            svg {
-              fill: #fadb14;
-            }
-          }
-          .seaui-rate-itme-right {
-            svg {
-              fill: #fadb14;
-            }
-          }
         }
         &.seaui-rate-item-half-star {
           transform: scale(1.2);
-          .seaui-rate-item-left {
-            svg {
-              fill: #fadb14;
-            }
-          }
         }
         &.seaui-rate-item-wrapper-transition {
-          transition: transform 0.5s;
+          transition: transform 0.2s;
         }
       }
     }

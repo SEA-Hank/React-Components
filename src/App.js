@@ -8,6 +8,7 @@ import {
   Select,
   Input,
   Switch,
+  Rate,
   SeaUISize,
 } from "./_util";
 function App() {
@@ -51,134 +52,16 @@ function App() {
   );
   return (
     <div className="App">
-      <div style={{ marginTop: "50px" }}>
-        <Button
-          text="查 询"
-          color={SeaUIColor.blue}
-          type={Button.BtnType.leftIconBtn}
-          onclick={handleClick}
-          icon="fa-star"
-          key="0"
-          disable={true}
-          size={SeaUISize.Small}
-        />
-        <Button
-          text="查 询"
-          color={SeaUIColor.blue}
-          type={Button.BtnType.iconBtn}
-          onclick={handleClick}
-          icon="fa-star"
-          key="0"
-          disable={true}
-          size={SeaUISize.Medium}
-        />
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        <Radio
-          data={testdata}
-          defaultValue="广州"
-          color={SeaUIColor.grey}
-          key="1"
-        >
-          <Radio.ButtonOption
-            text="佛山"
-            value="佛山"
-            key="1"
-          ></Radio.ButtonOption>
-          <Radio.ButtonOption
-            text="广州"
-            value="广州"
-            key="2"
-          ></Radio.ButtonOption>
-        </Radio>
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        <Radio
-          key="2"
-          options={testdata}
-          color={SeaUIColor.red}
-          optionType={Radio.OptionType.defalut}
-          size={SeaUISize.Small}
-          defaultValue="03"
-          disable={true}
-        ></Radio>
-      </div>
-      <div id="dfdfdfdf" style={{ marginTop: "50px" }}>
-        <CheckBox
-          key="3"
-          options={testdata2}
-          color={SeaUIColor.blue}
-          defaultValue={["001"]}
-          size={SeaUISize.Small}
-          disable={true}
-        ></CheckBox>
-      </div>
-      <div id="dfdfdfdf" style={{ marginTop: "50px" }}>
-        <CheckBox
-          key="99"
-          color={SeaUIColor.blue}
-          defaultValue={["001"]}
-          size={SeaUISize.Small}
-        >
-          <CheckBox.Option text="测试" value="001" disable={true} />
-          <CheckBox.Option text="测试2" value="002" />
-          <CheckBox.Option text="测试3" value="003" />
-        </CheckBox>
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        <Select
-          options={testdata4}
-          defaultValue={"001"}
-          color={SeaUIColor.red}
-        ></Select>
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        <Input
-          data={testdata3}
-          addonBefore="http://"
-          color={SeaUIColor.red}
-          addonAfter={after}
-          disable={false}
-          defaultValue={"test"}
-        ></Input>
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        <Input
-          data={testdata3}
-          addonBefore={after}
-          color={SeaUIColor.green}
-          addonAfter=".com"
-          maxLength="5"
-          showDelBtn={false}
-        ></Input>
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        <Input.Number
-          addonBefore="Number :"
-          numberFormat="(###)###-####"
-        ></Input.Number>
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        <Input.Curreny addonBefore="Curreny :"></Input.Curreny>
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        <Input.Password
-          addonAfter={
-            <Button
-              text="查 询"
-              color={SeaUIColor.blue}
-              type={Button.BtnType.leftIconBtn}
-              onclick={handleClick}
-              customClass="sdfdsfdsf"
-              icon="fa-star"
-              key="0"
-            />
-          }
-        ></Input.Password>
-      </div>
-      <div style={{ marginTop: "50px" }}>
-        <Switch kk="111"></Switch>
-      </div>
+      <Radio
+        key="2"
+        options={testdata}
+        color={SeaUIColor.red}
+        optionType={Radio.OptionType.defalut}
+        size={SeaUISize.Small}
+        defaultValue="03"
+        disable={false}
+      ></Radio>
+      <Rate></Rate>
     </div>
   );
 }

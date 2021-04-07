@@ -14,23 +14,27 @@ function Switch(props, ref) {
   });
 
   useImperativeHandle(ref, () => ({
-    focus: () => {
-      console.logf("showName");
+    getValue: () => {
+      return checked;
     },
   }));
 
   const onclick = () => {
-    setText(!checked ? props.checkedText : props.unCheckText);
+    let { checkedText, unCheckText, onChange, size, color, disable } = props;
+    if (onChange) {
+      onChange(!checked);
+    }
+    setText(!checked ? checkedText : unCheckText);
     buttonClasses.change(
       "seaui-switch",
-      props.size,
+      size,
       {
         "seaui-switch-checked": !checked,
         "seaui-switch-checked-effect": !checked,
         "seaui-switch-uncheck-effect": checked,
       },
-      props.color,
-      { "seaui-disable": props.disable }
+      color,
+      { "seaui-disable": disable }
     );
     setChecked((checked) => !checked);
   };
@@ -54,13 +58,15 @@ Switch.propTypes = {
   color: PropTypes.string,
   size: PropTypes.string,
   disable: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 Switch.defaultProps = {
   defaultChecked: true,
-  checkedText: "开启",
-  unCheckText: "关闭",
+  checkedText: "YES",
+  unCheckText: "NO",
   color: SeaUIColor.red,
   size: SeaUISize.Small,
   disable: false,
+  onChange: null,
 };
 export { Switch };

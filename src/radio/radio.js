@@ -15,9 +15,9 @@ export class Radio extends SeaUIBase {
   constructor(props) {
     super(props, SeaUIType.RADIO);
     this.state = {
-      options: this.props.options,
       value: this.props.defaultValue,
       effect: false,
+      options: this.getOptions(),
     };
   }
 
@@ -33,7 +33,7 @@ export class Radio extends SeaUIBase {
       return this.props.children;
     }
     let items = [];
-    this.state.options.forEach((item, index) => {
+    this.props.options.forEach((item, index) => {
       let arrt = {
         text: item.text,
         value: item.value,
@@ -61,7 +61,6 @@ export class Radio extends SeaUIBase {
   }
 
   render() {
-    // let childrenToRender
     return (
       <RadioContext.Provider
         value={{
@@ -73,7 +72,7 @@ export class Radio extends SeaUIBase {
           disable: this.props.disable,
         }}
       >
-        <div className={this.classNames()}>{this.getOptions()}</div>
+        <div className={this.classNames()}>{this.state.options}</div>
       </RadioContext.Provider>
     );
   }

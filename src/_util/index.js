@@ -10,4 +10,6 @@ export { Select } from "../select";
 
 export { Switch } from "../switch";
 
+export { Rate } from "../rate";
+
 export { SeaUIColor, SeaUISize } from "./types";

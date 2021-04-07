@@ -1,0 +1,75 @@
+@import "../_util/SeauiBaseStyle.scss";
+div.seaui-rate-wrapper {
+  @extend %reset-css;
+  display: inline-block;
+  ul {
+    height: 30px;
+    display: inline-flex;
+    flex-direction: row;
+    cursor: pointer;
+    gap: 10px;
+    align-items: center;
+    li {
+      list-style: none;
+      .seaui-rate-item-wrapper {
+        width: 18px;
+        height: 18px;
+        display: flex;
+        flex-direction: row;
+        .seaui-rate-item-left {
+          cursor: pointer;
+          height: 100%;
+          width: 50%;
+          overflow: hidden;
+          svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+            stroke: #fadb14;
+            stroke-width: 3px;
+            vertical-align: top;
+          }
+        }
+        .seaui-rate-itme-right {
+          cursor: pointer;
+          height: 100%;
+          width: 50%;
+          overflow: hidden;
+          svg {
+            vertical-align: top;
+            width: 18px;
+            height: 18px;
+            stroke: #fadb14;
+            stroke-width: 3px;
+            fill: white;
+            transform: translateX(-50%);
+          }
+        }
+        &.seaui-rate-item-whole-star {
+          transform: scale(1.2);
+          .seaui-rate-item-left {
+            svg {
+              fill: #fadb14;
+            }
+          }
+          .seaui-rate-itme-right {
+            svg {
+              fill: #fadb14;
+            }
+          }
+        }
+        &.seaui-rate-item-half-star {
+          transform: scale(1.2);
+          .seaui-rate-item-left {
+            svg {
+              fill: #fadb14;
+            }
+          }
+        }
+        &.seaui-rate-item-wrapper-transition {
+          transition: transform 0.5s;
+        }
+      }
+    }
+  }
+}

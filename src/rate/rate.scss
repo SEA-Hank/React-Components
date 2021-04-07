@@ -107,9 +107,14 @@ div.seaui-rate-wrapper {
           transform: scale(1.2);
         }
         &.seaui-rate-item-wrapper-transition {
-          transition: transform 0.2s;
+          //transition: transform 0.2s;
         }
       }
+    }
+  }
+  &.seaui-disabled {
+    * {
+      cursor: not-allowed;
     }
   }
 }

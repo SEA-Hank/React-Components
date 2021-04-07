@@ -13,7 +13,8 @@ function Rate(props) {
   const classnames = useClassNames(
     "seaui-rate-wrapper",
     props.size,
-    props.color
+    props.color,
+    { "seaui-disabled": props.disabled }
   );
 
   const options = [];
@@ -22,11 +23,13 @@ function Rate(props) {
   }
 
   const onChange = (ishover, value) => {
-    SetTemporary(value);
-    if (!ishover) {
-      setRateValue(value);
-      if (props.onChange) {
-        props.onChange(value);
+    if (!props.disabled) {
+      SetTemporary(value);
+      if (!ishover) {
+        setRateValue(value);
+        if (props.onChange) {
+          props.onChange(value);
+        }
       }
     }
   };
@@ -48,7 +51,7 @@ Rate.propTypes = {
   quantity: PropTypes.number,
   color: PropTypes.string,
   size: PropTypes.string,
-  disable: PropTypes.bool,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func,
 };
 Rate.defaultProps = {
@@ -56,7 +59,7 @@ Rate.defaultProps = {
   quantity: 5,
   color: SeaUIColor.red,
   size: SeaUISize.Small,
-  disable: false,
+  disabled: false,
   onChange: null,
 };
 export { Rate };

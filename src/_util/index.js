@@ -12,4 +12,6 @@ export { Switch } from "../switch";
 
 export { Rate } from "../rate";
 
+export { Slider } from "../slider";
+
 export { SeaUIColor, SeaUISize } from "./types";

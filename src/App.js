@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
 import {
   Button,
@@ -10,8 +10,11 @@ import {
   Switch,
   Rate,
   SeaUISize,
+  Slider,
 } from "./_util";
 function App() {
+  const [seaui_disable, set_seaui_disable] = useState(false);
+  const [seaui_color, set_seaui_color] = useState(SeaUIColor.blue);
   let testdata = [
     { text: "北京", value: "01", disable: false },
     { text: "广州", value: "02", disable: false },
@@ -39,6 +42,10 @@ function App() {
     console.log("i am at the parent class");
     console.log(refContainer);
   };
+  let onClick = () => {
+    set_seaui_color(seaui_disable ? SeaUIColor.blue : SeaUIColor.red);
+    set_seaui_disable(!seaui_disable);
+  };
 
   const refContainer = React.createRef();
 
@@ -52,16 +59,16 @@ function App() {
   );
   return (
     <div className="App">
-      <Radio
-        key="2"
-        options={testdata}
-        color={SeaUIColor.red}
-        optionType={Radio.OptionType.defalut}
-        size={SeaUISize.Small}
-        defaultValue="03"
-        disable={false}
-      ></Radio>
       <Rate></Rate>
+      <div>
+        <Slider disable={seaui_disable} color={seaui_color}></Slider>
+      </div>
+      {/* <div>
+        <Slider></Slider>
+      </div> */}
+      <div>
+        <button onClick={onClick}>点击</button>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,73 @@
+@import "../_util/SeauiBaseStyle.scss";
+div.seaui-slider-wrapper {
+  display: inline-block;
+  height: 30px;
+  padding: 0px 5px 0px 5px;
+  width: 200px;
+  position: relative;
+  opacity: 0.6;
+  transition: all 0.5s;
+
+  div.seaui-slider-rail {
+    height: 3px;
+    width: inherit;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+  }
+
+  div.seaui-slider-track {
+    height: 3px;
+    left: 0px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+  }
+  div.seaui-slider-handle {
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 10px;
+    transform: translateY(-40%) translateX(50%);
+  }
+  div.seaui-slider-event-mask {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    z-index: 800;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    cursor: pointer;
+  }
+  @each $name, $color in $colors {
+    &.seaui-color-#{$name} {
+      div.seaui-slider-track {
+        background-color: $color;
+      }
+      div.seaui-slider-handle {
+        border: 2px solid $color;
+      }
+      &.seaui-slider-changing {
+        opacity: 1;
+        div.seaui-slider-handle {
+          box-shadow: $color 0px 0px 3px 2px;
+        }
+      }
+    }
+  }
+  &:hover {
+    opacity: 1;
+    div.seaui-slider-rail {
+      //background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+  &.seaui-disable {
+    div.seaui-slider-event-mask {
+      cursor: not-allowed !important;
+    }
+  }
+}

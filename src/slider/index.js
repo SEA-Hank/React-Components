@@ -4,17 +4,79 @@ import PropTypes from "prop-types";
 import { SeaUIColor, SeaUISize } from "../_util/SeaUIBase";
 import { useClassNames } from "../_util/hooks/useClassNames";
 function Slider(props) {
-  let railInfo = null;
-  const rail = useRef(null);
-  const [rightHandlePosition, setRightHandlePosition] = useState(
-    [1 - props.defaultValue / props.max] * 100 + "%"
+  let calculateHandlePosiiton = (isfirsthandle, value) => {
+    if (isfirsthandle && value == props.min) {
+      return "0%";
+    }
+    return ((value / props.max) * 100).toFixed(2) + "%";
+  };
+
+  let calculateTrackWidth = (first_handle_position, second_handle_position) => {
+    return (
+      Math.abs(
+        parseFloat(second_handle_position) - parseFloat(first_handle_position)
+      ) + "%"
+    );
+  };
+
+  let first_handle_element = null;
+  const isSingleHandle = !Array.isArray(props.defaultValue);
+
+  const [values, setValues] = useState(
+    !isSingleHandle ? props.defaultValue : [props.min, props.defaultValue]
   );
+
+  const [first_handle_position, set_first_handle_position] = useState(
+    calculateHandlePosiiton(true, values[0])
+  );
+  const [second_handle_position, set_second_handle_position] = useState(
+    calculateHandlePosiiton(false, values[1])
+  );
+  const [track_width, set_trail_width] = useState(
+    calculateTrackWidth(first_handle_position, second_handle_position)
+  );
+  const [track_left_position, set_track_left_position] = useState(
+    first_handle_position
+  );
+
+  let railRectInfo = null;
+  const rail = useRef(null);
+
   const wrapperClasses = useClassNames();
+
+  if (!isSingleHandle) {
+    first_handle_element = (
+      <div
+        className="seaui-slider-handle"
+        style={{ left: first_handle_position }}
+      ></div>
+    );
+  }
+
+  let is_second_handle_action = null;
+  const detect_action_handle = (event) => {
+    if (isSingleHandle) {
+      is_second_handle_action = true;
+      return;
+    }
+    let position =
+      ((event.pageX - railRectInfo.left) / railRectInfo.width) * 100;
+    is_second_handle_action =
+      Math.abs(parseFloat(first_handle_position) - position) >
+      Math.abs(parseFloat(second_handle_position) - position);
+  };
+
+  const calculateTrackLeftPosition = (firstPosition, secondPosition) => {
+    return parseFloat(firstPosition) < parseFloat(secondPosition)
+      ? firstPosition
+      : secondPosition;
+  };
 
   const onMouseDown = (event) => {
     if (!props.disable) {
-      railInfo = rail.current.getBoundingClientRect();
-      setRightHandlePosition(getPosition(event));
+      railRectInfo = rail.current.getBoundingClientRect();
+      detect_action_handle(event);
+      onMouseMove(event);
       wrapperClasses.change(
         "seaui-slider-wrapper",
         props.color,
@@ -34,18 +96,48 @@ function Slider(props) {
   };
 
   const onMouseMove = (event) => {
-    setRightHandlePosition(getPosition(event));
+    let { position, val } = getPosition(event);
+    if (is_second_handle_action) {
+      set_second_handle_position(position);
+      set_trail_width(calculateTrackWidth(first_handle_position, position));
+      setValues(
+        [values[0], val].sort((a, b) => {
+          return a - b;
+        })
+      );
+      set_track_left_position(
+        calculateTrackLeftPosition(first_handle_position, position)
+      );
+      return;
+    }
+    set_first_handle_position(position);
+    set_trail_width(calculateTrackWidth(position, second_handle_position));
+    setValues(
+      [val, values[1]].sort((a, b) => {
+        return a - b;
+      })
+    );
+    set_track_left_position(
+      calculateTrackLeftPosition(position, second_handle_position)
+    );
   };
 
   const getPosition = (event) => {
-    let val = ((event.pageX - railInfo.left) / railInfo.width) * props.max;
+    let val =
+      ((event.pageX - railRectInfo.left) / railRectInfo.width) * props.max;
     let steps = ((val - props.min) / props.step).toFixed(0);
     val = parseInt(steps) * props.step + props.min;
-    let position = parseFloat((1 - val / props.max).toFixed(2));
+    val = val > props.max ? props.max : val;
+    val = val < props.min ? props.min : val;
+
+    let position =
+      val == props.min ? 0 : val == props.max ? 1 : val / props.max;
+    // let position = (event.pageX - railRectInfo.left) / railRectInfo.width;
     position = position > 1 ? 1 : position;
     position = position < 0 ? 0 : position;
     position = (position * 100).toFixed(2);
-    return position + "%";
+    position += "%";
+    return { position, val };
   };
 
   useEffect(() => {
@@ -60,20 +152,25 @@ function Slider(props) {
       <div
         className="seaui-slider-track"
         style={{
-          right: rightHandlePosition,
+          left: track_left_position,
+          width: track_width,
         }}
       ></div>
+      {first_handle_element}
       <div
         className="seaui-slider-handle"
-        style={{ right: rightHandlePosition }}
+        style={{ left: second_handle_position }}
       ></div>
       <div className="seaui-slider-event-mask" onMouseDown={onMouseDown}></div>
+      <div>
+        {values[0]} -- {values[1]}
+      </div>
     </div>
   );
 }
 
 Slider.propTypes = {
-  defaultValue: PropTypes.number,
+  defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.array]),
   max: PropTypes.number,
   min: PropTypes.number,
   color: PropTypes.string,
@@ -83,7 +180,7 @@ Slider.propTypes = {
   step: PropTypes.number,
 };
 Slider.defaultProps = {
-  defaultValue: 48,
+  defaultValue: [20, 80],
   max: 100,
   min: 0,
   color: SeaUIColor.red,

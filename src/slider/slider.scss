@@ -2,12 +2,10 @@
 div.seaui-slider-wrapper {
   display: inline-block;
   height: 30px;
-  padding: 0px 5px 0px 5px;
   width: 200px;
   position: relative;
   opacity: 0.6;
-  transition: all 0.5s;
-
+  transition: opacity 0.5s;
   div.seaui-slider-rail {
     height: 3px;
     width: inherit;
@@ -19,7 +17,6 @@ div.seaui-slider-wrapper {
 
   div.seaui-slider-track {
     height: 3px;
-    left: 0px;
     border-radius: 10px;
     position: absolute;
     top: 50%;
@@ -31,7 +28,7 @@ div.seaui-slider-wrapper {
     height: 10px;
     background-color: white;
     border-radius: 10px;
-    transform: translateY(-40%) translateX(50%);
+    transform: translateY(-40%) translateX(-50%);
   }
   div.seaui-slider-event-mask {
     height: 100%;

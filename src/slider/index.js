@@ -19,41 +19,6 @@ function Slider(props) {
     );
   };
 
-  let first_handle_element = null;
-  const isSingleHandle = !Array.isArray(props.defaultValue);
-
-  const [values, setValues] = useState(
-    !isSingleHandle ? props.defaultValue : [props.min, props.defaultValue]
-  );
-
-  const [first_handle_position, set_first_handle_position] = useState(
-    calculateHandlePosiiton(true, values[0])
-  );
-  const [second_handle_position, set_second_handle_position] = useState(
-    calculateHandlePosiiton(false, values[1])
-  );
-  const [track_width, set_trail_width] = useState(
-    calculateTrackWidth(first_handle_position, second_handle_position)
-  );
-  const [track_left_position, set_track_left_position] = useState(
-    first_handle_position
-  );
-
-  let railRectInfo = null;
-  const rail = useRef(null);
-
-  const wrapperClasses = useClassNames();
-
-  if (!isSingleHandle) {
-    first_handle_element = (
-      <div
-        className="seaui-slider-handle"
-        style={{ left: first_handle_position }}
-      ></div>
-    );
-  }
-
-  let is_second_handle_action = null;
   const detect_action_handle = (event) => {
     if (isSingleHandle) {
       is_second_handle_action = true;
@@ -72,9 +37,72 @@ function Slider(props) {
       : secondPosition;
   };
 
+  const getPosition = (event) => {
+    let val =
+      ((event.pageX - railRectInfo.left) / railRectInfo.width) * props.max;
+    let steps = ((val - props.min) / props.step).toFixed(0);
+    val = parseInt(steps) * props.step + props.min;
+    val = val > props.max ? props.max : val;
+    val = val < props.min ? props.min : val;
+
+    let position =
+      val == props.min ? 0 : val == props.max ? 1 : val / props.max;
+    position = position > 1 ? 1 : position;
+    position = position < 0 ? 0 : position;
+    position = (position * 100).toFixed(2);
+    position += "%";
+    return { position, val };
+  };
+
+  const calculateValues = (val1, val2) => {
+    return val1 < val2 ? [val1, val2] : [val2, val1];
+  };
+
+  let first_handle_element = null;
+
+  let is_second_handle_action = null;
+
+  const isSingleHandle = !Array.isArray(props.defaultValue);
+
+  let isHandleReverse = false;
+
+  let railRectInfo = null;
+
+  const rail = useRef(null);
+
+  const [values, setValues] = useState(
+    !isSingleHandle ? props.defaultValue : [props.min, props.defaultValue]
+  );
+
+  const [first_handle_position, set_first_handle_position] = useState(
+    calculateHandlePosiiton(true, values[0])
+  );
+  const [second_handle_position, set_second_handle_position] = useState(
+    calculateHandlePosiiton(false, values[1])
+  );
+  const [track_width, set_trail_width] = useState(
+    calculateTrackWidth(first_handle_position, second_handle_position)
+  );
+  const [track_left_position, set_track_left_position] = useState(
+    first_handle_position
+  );
+
+  const wrapperClasses = useClassNames();
+
+  if (!isSingleHandle) {
+    first_handle_element = (
+      <div
+        className="seaui-slider-handle"
+        style={{ left: first_handle_position }}
+      ></div>
+    );
+  }
+
   const onMouseDown = (event) => {
     if (!props.disable) {
       railRectInfo = rail.current.getBoundingClientRect();
+      isHandleReverse =
+        parseFloat(first_handle_position) > parseFloat(second_handle_position);
       detect_action_handle(event);
       onMouseMove(event);
       wrapperClasses.change(
@@ -87,6 +115,7 @@ function Slider(props) {
       document.addEventListener("mouseup", onMouseUp);
     }
   };
+
   const onMouseUp = (event) => {
     if (!props.disable) {
       wrapperClasses.change("seaui-slider-wrapper", props.color);
@@ -100,11 +129,7 @@ function Slider(props) {
     if (is_second_handle_action) {
       set_second_handle_position(position);
       set_trail_width(calculateTrackWidth(first_handle_position, position));
-      setValues(
-        [values[0], val].sort((a, b) => {
-          return a - b;
-        })
-      );
+      setValues(calculateValues(val, isHandleReverse ? values[1] : values[0]));
       set_track_left_position(
         calculateTrackLeftPosition(first_handle_position, position)
       );
@@ -112,32 +137,10 @@ function Slider(props) {
     }
     set_first_handle_position(position);
     set_trail_width(calculateTrackWidth(position, second_handle_position));
-    setValues(
-      [val, values[1]].sort((a, b) => {
-        return a - b;
-      })
-    );
+    setValues(calculateValues(val, isHandleReverse ? values[0] : values[1]));
     set_track_left_position(
       calculateTrackLeftPosition(position, second_handle_position)
     );
-  };
-
-  const getPosition = (event) => {
-    let val =
-      ((event.pageX - railRectInfo.left) / railRectInfo.width) * props.max;
-    let steps = ((val - props.min) / props.step).toFixed(0);
-    val = parseInt(steps) * props.step + props.min;
-    val = val > props.max ? props.max : val;
-    val = val < props.min ? props.min : val;
-
-    let position =
-      val == props.min ? 0 : val == props.max ? 1 : val / props.max;
-    // let position = (event.pageX - railRectInfo.left) / railRectInfo.width;
-    position = position > 1 ? 1 : position;
-    position = position < 0 ? 0 : position;
-    position = (position * 100).toFixed(2);
-    position += "%";
-    return { position, val };
   };
 
   useEffect(() => {

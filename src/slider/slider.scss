@@ -30,16 +30,6 @@ div.seaui-slider-wrapper {
     border-radius: 10px;
     transform: translateY(-40%) translateX(-50%);
   }
-  div.seaui-slider-event-mask {
-    height: 100%;
-    width: 100%;
-    background-color: transparent;
-    z-index: 800;
-    top: 0px;
-    left: 0px;
-    position: absolute;
-    cursor: pointer;
-  }
   @each $name, $color in $colors {
     &.seaui-color-#{$name} {
       div.seaui-slider-track {
@@ -47,12 +37,13 @@ div.seaui-slider-wrapper {
       }
       div.seaui-slider-handle {
         border: 2px solid $color;
-      }
-      &.seaui-slider-changing {
-        opacity: 1;
-        div.seaui-slider-handle {
+        &.seaui-slider-handle-activated {
           box-shadow: $color 0px 0px 3px 2px;
+          cursor: pointer;
         }
+      }
+      &.seaui-slider-activated {
+        opacity: 1;
       }
     }
   }

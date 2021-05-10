@@ -14,4 +14,6 @@ export { Rate } from "../rate";
 
 export { Slider } from "../slider";
 
+export { Tooltip } from "../tooltip";
+
 export { SeaUIColor, SeaUISize } from "./types";

@@ -1,43 +1,42 @@
 import "./slider.scss";
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { SeaUIColor, SeaUISize } from "../_util/SeaUIBase";
 import { useClassNames } from "../_util/hooks/useClassNames";
+import { Handle } from "./handle";
 function Slider(props) {
-  let calculateHandlePosiiton = (isfirsthandle, value) => {
-    if (isfirsthandle && value == props.min) {
-      return "0%";
-    }
-    return ((value / props.max) * 100).toFixed(2) + "%";
+  let initHdInfo = (value) => {
+    let offset =
+      value == props.min ? "0%" : ((value / props.max) * 100).toFixed(2) + "%";
+    return props.horizontal
+      ? { left: offset, activated: false, value }
+      : { top: offset, activated: false, value };
   };
 
-  let calculateTrackWidth = (first_handle_position, second_handle_position) => {
-    return (
-      Math.abs(
-        parseFloat(second_handle_position) - parseFloat(first_handle_position)
-      ) + "%"
-    );
+  let calcTrackWidth = (leftOne, leftTwo) => {
+    return Math.abs(parseFloat(leftOne) - parseFloat(leftTwo)) + "%";
   };
 
-  const detect_action_handle = (event) => {
-    if (isSingleHandle) {
-      is_second_handle_action = true;
+  const calcActionInfo = (event) => {
+    let mousePst =
+      ((event.pageX - railRectInfo.left) / railRectInfo.width) * 100;
+    let isHdTwoActivated =
+      Math.abs(parseFloat(hdOneInfo.left) - mousePst) >
+      Math.abs(parseFloat(hdTwoInfo.left) - mousePst);
+    if (isSingleHandle || isHdTwoActivated) {
+      fixHdObject = hdOneOj;
+      activatedHdObject = hdTwoOj;
       return;
     }
-    let position =
-      ((event.pageX - railRectInfo.left) / railRectInfo.width) * 100;
-    is_second_handle_action =
-      Math.abs(parseFloat(first_handle_position) - position) >
-      Math.abs(parseFloat(second_handle_position) - position);
+    fixHdObject = hdTwoOj;
+    activatedHdObject = hdOneOj;
   };
 
-  const calculateTrackLeftPosition = (firstPosition, secondPosition) => {
-    return parseFloat(firstPosition) < parseFloat(secondPosition)
-      ? firstPosition
-      : secondPosition;
+  const calcTkStartPst = (pstOne, pstTwo) => {
+    return parseFloat(pstOne) < parseFloat(pstTwo) ? pstOne : pstTwo;
   };
 
-  const getPosition = (event) => {
+  const calcPstVal = (event) => {
     let val =
       ((event.pageX - railRectInfo.left) / railRectInfo.width) * props.max;
     let steps = ((val - props.min) / props.step).toFixed(0);
@@ -45,26 +44,21 @@ function Slider(props) {
     val = val > props.max ? props.max : val;
     val = val < props.min ? props.min : val;
 
-    let position =
-      val == props.min ? 0 : val == props.max ? 1 : val / props.max;
-    position = position > 1 ? 1 : position;
-    position = position < 0 ? 0 : position;
+    let position = val == props.min ? 0 : val / props.max;
     position = (position * 100).toFixed(2);
     position += "%";
     return { position, val };
   };
 
-  const calculateValues = (val1, val2) => {
+  const calcValues = (val1, val2) => {
     return val1 < val2 ? [val1, val2] : [val2, val1];
   };
 
-  let first_handle_element = null;
+  let fixHdObject = null;
 
-  let is_second_handle_action = null;
+  let activatedHdObject = null;
 
   const isSingleHandle = !Array.isArray(props.defaultValue);
-
-  let isHandleReverse = false;
 
   let railRectInfo = null;
 
@@ -74,41 +68,29 @@ function Slider(props) {
     !isSingleHandle ? props.defaultValue : [props.min, props.defaultValue]
   );
 
-  const [first_handle_position, set_first_handle_position] = useState(
-    calculateHandlePosiiton(true, values[0])
+  let hdOneOj = null;
+  let hdTwoOj = null;
+
+  let [hdOneInfo, setHdOneInfo] = (hdOneOj = useState(initHdInfo(values[0])));
+
+  let [hdTwoInfo, setHdTwoInfo] = (hdTwoOj = useState(initHdInfo(values[1])));
+
+  const [trackWidth, setTrailWidth] = useState(
+    calcTrackWidth(hdOneInfo.left, hdTwoInfo.left)
   );
-  const [second_handle_position, set_second_handle_position] = useState(
-    calculateHandlePosiiton(false, values[1])
-  );
-  const [track_width, set_trail_width] = useState(
-    calculateTrackWidth(first_handle_position, second_handle_position)
-  );
-  const [track_left_position, set_track_left_position] = useState(
-    first_handle_position
-  );
+  const [trackStartPosition, setTrackStartPosition] = useState(hdOneInfo.left);
 
   const wrapperClasses = useClassNames();
-
-  if (!isSingleHandle) {
-    first_handle_element = (
-      <div
-        className="seaui-slider-handle"
-        style={{ left: first_handle_position }}
-      ></div>
-    );
-  }
 
   const onMouseDown = (event) => {
     if (!props.disable) {
       railRectInfo = rail.current.getBoundingClientRect();
-      isHandleReverse =
-        parseFloat(first_handle_position) > parseFloat(second_handle_position);
-      detect_action_handle(event);
-      onMouseMove(event);
+      calcActionInfo(event);
+      action(event, true);
       wrapperClasses.change(
         "seaui-slider-wrapper",
         props.color,
-        "seaui-slider-changing",
+        "seaui-slider-activated",
         { "seaui-disable": props.disable }
       );
       document.addEventListener("mousemove", onMouseMove);
@@ -119,28 +101,27 @@ function Slider(props) {
   const onMouseUp = (event) => {
     if (!props.disable) {
       wrapperClasses.change("seaui-slider-wrapper", props.color);
+      action(event, false);
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
     }
   };
 
   const onMouseMove = (event) => {
-    let { position, val } = getPosition(event);
-    if (is_second_handle_action) {
-      set_second_handle_position(position);
-      set_trail_width(calculateTrackWidth(first_handle_position, position));
-      setValues(calculateValues(val, isHandleReverse ? values[1] : values[0]));
-      set_track_left_position(
-        calculateTrackLeftPosition(first_handle_position, position)
-      );
-      return;
-    }
-    set_first_handle_position(position);
-    set_trail_width(calculateTrackWidth(position, second_handle_position));
-    setValues(calculateValues(val, isHandleReverse ? values[0] : values[1]));
-    set_track_left_position(
-      calculateTrackLeftPosition(position, second_handle_position)
-    );
+    action(event, true);
+  };
+
+  const action = (event, activated) => {
+    let { position, val } = calcPstVal(event);
+    setValues(calcValues(val, fixHdObject[0].value));
+    setTrailWidth(calcTrackWidth(fixHdObject[0].left, position));
+    setTrackStartPosition(calcTkStartPst(fixHdObject[0].left, position));
+    activatedHdObject[1]({
+      value: val,
+      left: position,
+      top: position,
+      activated,
+    });
   };
 
   useEffect(() => {
@@ -150,24 +131,32 @@ function Slider(props) {
   }, [props.color, props.disable]);
 
   return (
-    <div className={wrapperClasses.classes}>
+    <div className={wrapperClasses.classes} onMouseDown={onMouseDown}>
       <div ref={rail} className="seaui-slider-rail"></div>
       <div
         className="seaui-slider-track"
         style={{
-          left: track_left_position,
-          width: track_width,
+          left: trackStartPosition,
+          width: trackWidth,
         }}
       ></div>
-      {first_handle_element}
-      <div
-        className="seaui-slider-handle"
-        style={{ left: second_handle_position }}
-      ></div>
-      <div className="seaui-slider-event-mask" onMouseDown={onMouseDown}></div>
-      <div>
-        {values[0]} -- {values[1]}
-      </div>
+      {!isSingleHandle && (
+        <Handle
+          left={hdOneInfo.left}
+          top={hdOneInfo.top}
+          horizontal={props.horizontal}
+          activated={hdOneInfo.activated}
+          value={hdOneInfo.value}
+        ></Handle>
+      )}
+      <Handle
+        left={hdTwoInfo.left}
+        top={hdTwoInfo.top}
+        activated={hdTwoInfo.activated}
+        horizontal={props.horizontal}
+        value={hdTwoInfo.value}
+      ></Handle>
+      {/* <div className="seaui-slider-event-mask"></div> */}
     </div>
   );
 }
@@ -181,6 +170,7 @@ Slider.propTypes = {
   disable: PropTypes.bool,
   onChange: PropTypes.func,
   step: PropTypes.number,
+  horizontal: PropTypes.bool,
 };
 Slider.defaultProps = {
   defaultValue: [20, 80],
@@ -191,5 +181,6 @@ Slider.defaultProps = {
   disable: true,
   onChange: null,
   step: 1,
+  horizontal: true,
 };
 export { Slider };

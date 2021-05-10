@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./App.css";
+// import "./App.css";
 import {
   Button,
   SeaUIColor,
@@ -11,6 +11,7 @@ import {
   Rate,
   SeaUISize,
   Slider,
+  Tooltip,
 } from "./_util";
 function App() {
   const [seaui_disable, set_seaui_disable] = useState(false);
@@ -57,17 +58,12 @@ function App() {
       size={SeaUISize.Small}
     ></Select>
   );
+  const inputEl = useRef(null);
   return (
     <div className="App">
-      <Rate></Rate>
-      <div>
+      {/* <Rate></Rate> */}
+      <div style={{ position: "relative", top: "100px", left: "100px" }}>
         <Slider disable={seaui_disable} color={seaui_color}></Slider>
-      </div>
-      {/* <div>
-        <Slider></Slider>
-      </div> */}
-      <div>
-        <button onClick={onClick}>点击</button>
       </div>
     </div>
   );

@@ -1,0 +1,66 @@
+.App {
+  margin: 0px;
+  padding: 0px;
+  width: 1000px;
+  margin: 0px auto;
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  padding: 50px 0px;
+  & * {
+    margin: 0px;
+    padding: 0px;
+  }
+  .menu {
+    flex-basis: 180px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    ul {
+      li {
+        text-align: center;
+        list-style: none;
+        width: 100%;
+        a {
+          width: inherit;
+          text-align: center;
+          display: block;
+          padding: 15px 0px;
+          text-decoration: none;
+          background-color: #eeeeee;
+          color: #687980;
+          border-bottom: 1px solid #687980;
+          font-weight: 900;
+          &:hover {
+            color: #f7a440;
+          }
+        }
+        &:first-child {
+          a {
+            border-top: 1px solid #687980;
+          }
+        }
+      }
+    }
+  }
+  .ui-component {
+    flex-grow: 1;
+    ul {
+      li {
+        list-style: none;
+        div.component-wrapper {
+          div {
+            padding: 5px;
+            display: flex;
+            gap: 10px;
+          }
+          div.btn-size-wrapper {
+            align-items: flex-end;
+          }
+          div.icon-btn-wrapper {
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}

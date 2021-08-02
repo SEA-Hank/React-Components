@@ -156,7 +156,6 @@ function Slider(props) {
         horizontal={props.horizontal}
         value={hdTwoInfo.value}
       ></Handle>
-      {/* <div className="seaui-slider-event-mask"></div> */}
     </div>
   );
 }

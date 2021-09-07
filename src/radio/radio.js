@@ -99,7 +99,7 @@ Radio.propTypes = {
 Radio.defaultProps = {
   options: [],
   optionType: RadioOptionType.default,
-  color: SeaUIColor.bule,
+  color: SeaUIColor.blue,
   customClass: "",
   defaultValue: "",
   onchange: null,

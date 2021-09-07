@@ -43,24 +43,5 @@
     }
   }
   .ui-component {
-    flex-grow: 1;
-    ul {
-      li {
-        list-style: none;
-        div.component-wrapper {
-          div {
-            padding: 5px;
-            display: flex;
-            gap: 10px;
-          }
-          div.btn-size-wrapper {
-            align-items: flex-end;
-          }
-          div.icon-btn-wrapper {
-            align-items: center;
-          }
-        }
-      }
-    }
   }
 }

@@ -87,7 +87,7 @@ CheckBox.propTypes = {
 CheckBox.defaultProps = {
   options: [],
   defaultValue: [],
-  color: SeaUIColor.bule,
+  color: SeaUIColor.blue,
   customClass: "",
   onchange: null,
   size: SeaUISize.Small,

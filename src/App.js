@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { BtnPage } from "./pages/BtnPage";
 import { CBPage } from "./pages/CBPage";
 import { RadioPage } from "./pages/RadioPage";
+import { SelectPage } from "./pages/SelectPage";
+import { SwitchPage } from "./pages/SwitchPage";
+import { RatePage } from "./pages/RatePage";
 import "./App.scss";
 
 function App() {
@@ -18,19 +21,19 @@ function App() {
               <Link to="/cbpage">CHECKBOX</Link>
             </li>
             <li>
-              <a href="/radiopage">RADIO</a>
+              <Link to="/radiopage">RADIO</Link>
+            </li>
+            <li>
+              <Link to="/selectpage">SELECT</Link>
             </li>
             <li>
               <a href="">INPUT</a>
             </li>
             <li>
-              <a href="">SELECT</a>
+              <Link to="/switchpage">SWITCH</Link>
             </li>
             <li>
-              <a href="">SWITCH</a>
-            </li>
-            <li>
-              <a href="">TOOLTIP</a>
+              <Link to="/ratepage">RATE</Link>
             </li>
           </ul>
         </div>
@@ -44,6 +47,15 @@ function App() {
             </Route>
             <Route exact path="/radiopage">
               <RadioPage />
+            </Route>
+            <Route exact path="/selectpage">
+              <SelectPage />
+            </Route>
+            <Route exact path="/switchpage">
+              <SwitchPage />
+            </Route>
+            <Route exact path="/ratepage">
+              <RatePage />
             </Route>
           </Switch>
         </div>

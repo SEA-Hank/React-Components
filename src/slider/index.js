@@ -177,7 +177,7 @@ Slider.defaultProps = {
   min: 0,
   color: SeaUIColor.red,
   size: SeaUISize.Small,
-  disable: true,
+  disable: false,
   onChange: null,
   step: 1,
   horizontal: true,

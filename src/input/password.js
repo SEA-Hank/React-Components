@@ -4,9 +4,9 @@ import { SeaUIBase } from "../_util/SeaUIBase";
 export class Password extends SeaUIBase {
   constructor(props) {
     super(props, SeaUIType.PASSWORD);
-    this.openEyes = { btnLogo: "fa-eye-slash", inputHtmlType: "text" };
-    this.closeEyes = { btnLogo: "fa-eye", inputHtmlType: "password" };
-    this.state = this.openEyes;
+    this.openEyes = { btnLogo: "fa-eye", inputHtmlType: "text" };
+    this.closeEyes = { btnLogo: "fa-eye-slash", inputHtmlType: "password" };
+    this.state = this.closeEyes;
   }
 
   onBtnClick = () => {

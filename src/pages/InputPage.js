@@ -1,53 +1,37 @@
-import {
-  SeaUIColor,
-  SeaUISize,
-  Input,
-  // Rate,
-  // Slider,
-  // Tooltip,
-} from "../_util";
+import { SeaUIColor, SeaUISize, Input, Button, Select } from "../_util";
 function InputPage() {
   return (
     <div className="cb-wrapper">
       <div style={{ padding: "5px" }}>
-        <Radio defaultValue="1">
-          <Radio.Option value="1" text="Seattle" />
-          <Radio.Option value="2" text="Bellevue" />
-          <Radio.Option value="3" text="Renton" />
-        </Radio>
+        <Input />
       </div>
       <div style={{ padding: "5px" }}>
-        <Radio defaultValue="1" size={SeaUISize.Medium} color={SeaUIColor.red}>
-          <Radio.Option value="1" text="Seattle" />
-          <Radio.Option value="2" text="Bellevue" />
-          <Radio.Option value="3" text="Renton" disable={true} />
-        </Radio>
+        <Input addonBefore="CITY" />
       </div>
       <div style={{ padding: "5px" }}>
-        <Radio
-          defaultValue="1"
-          size={SeaUISize.Small}
-          disable={true}
-          color={SeaUIColor.red}
-        >
-          <Radio.Option value="1" text="Seattle" />
-          <Radio.Option value="2" text="Bellevue" />
-          <Radio.Option value="3" text="Renton" disable={true} />
-        </Radio>
+        <Input addonAfter={<Button text="Search" />} />
       </div>
       <div style={{ padding: "5px" }}>
-        <Radio defaultValue="1">
-          <Radio.ButtonOption value="1" text="Seattle" />
-          <Radio.ButtonOption value="2" text="Bellevue" />
-          <Radio.ButtonOption value="3" text="Renton" />
-        </Radio>
+        <Input
+          addonBefore={
+            <Select defaultValue="3" color={SeaUIColor.blue}>
+              <Select.Option value="" text="select one" />
+              <Select.Option value="1" text="Seatle" />
+              <Select.Option value="2" text="Renton" />
+              <Select.Option value="3" text="Bellevue" />
+            </Select>
+          }
+          addonAfter={<Button text="Search" />}
+        />
       </div>
       <div style={{ padding: "5px" }}>
-        <Radio defaultValue="1" size={SeaUISize.Medium}>
-          <Radio.ButtonOption value="1" text="Seattle" />
-          <Radio.ButtonOption value="2" text="Bellevue" />
-          <Radio.ButtonOption value="3" text="Renton" />
-        </Radio>
+        <Input.Number numberFormat="###-####-####" />
+      </div>
+      <div style={{ padding: "5px" }}>
+        <Input.Curreny />
+      </div>
+      <div style={{ padding: "5px" }}>
+        <Input.Password />
       </div>
     </div>
   );

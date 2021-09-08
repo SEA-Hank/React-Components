@@ -6,6 +6,8 @@ import { RadioPage } from "./pages/RadioPage";
 import { SelectPage } from "./pages/SelectPage";
 import { SwitchPage } from "./pages/SwitchPage";
 import { RatePage } from "./pages/RatePage";
+import { SliderPage } from "./pages/SliderPage";
+import { InputPage } from "./pages/InputPage";
 import "./App.scss";
 
 function App() {
@@ -27,13 +29,16 @@ function App() {
               <Link to="/selectpage">SELECT</Link>
             </li>
             <li>
-              <a href="">INPUT</a>
+              <Link to="/inputpage">INPUT</Link>
             </li>
             <li>
               <Link to="/switchpage">SWITCH</Link>
             </li>
             <li>
               <Link to="/ratepage">RATE</Link>
+            </li>
+            <li>
+              <Link to="/sliderpage">Slider</Link>
             </li>
           </ul>
         </div>
@@ -56,6 +61,12 @@ function App() {
             </Route>
             <Route exact path="/ratepage">
               <RatePage />
+            </Route>
+            <Route exact path="/sliderpage">
+              <SliderPage />
+            </Route>
+            <Route exact path="/inputpage">
+              <InputPage />
             </Route>
           </Switch>
         </div>

@@ -17,7 +17,7 @@ function RatePage() {
         <Rate />
       </div>
       <div style={{ padding: "5px" }}>
-        <Rate color={SeaUIColor.yellow} defaultValue="4" />
+        <Rate color={SeaUIColor.yellow} defaultValue={4} />
       </div>
       <div style={{ padding: "5px" }}></div>
       <div style={{ padding: "5px" }}></div>

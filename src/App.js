@@ -11,63 +11,67 @@ import { InputPage } from "./pages/InputPage";
 import "./App.scss";
 
 function App() {
+  let components = [
+    {
+      path: "/",
+      name: "BUTTON",
+      page: BtnPage,
+    },
+    {
+      path: "/cbpage",
+      name: "CHECKBOX",
+      page: CBPage,
+    },
+    {
+      path: "/radiopage",
+      name: "RADIO",
+      page: RadioPage,
+    },
+    {
+      path: "/selectpage",
+      name: "SELECT",
+      page: SelectPage,
+    },
+    {
+      path: "/inputpage",
+      name: "INPUT",
+      page: InputPage,
+    },
+    {
+      path: "/switchpage",
+      name: "SWITCH",
+      page: SwitchPage,
+    },
+    {
+      path: "/ratepage",
+      name: "RATE",
+      page: RatePage,
+    },
+    {
+      path: "/sliderpage",
+      name: "SLIDER",
+      page: SliderPage,
+    },
+  ];
   return (
     <Router>
       <div className="App">
         <div className="menu">
           <ul>
-            <li>
-              <Link to="/">BUTTON</Link>
-            </li>
-            <li>
-              <Link to="/cbpage">CHECKBOX</Link>
-            </li>
-            <li>
-              <Link to="/radiopage">RADIO</Link>
-            </li>
-            <li>
-              <Link to="/selectpage">SELECT</Link>
-            </li>
-            <li>
-              <Link to="/inputpage">INPUT</Link>
-            </li>
-            <li>
-              <Link to="/switchpage">SWITCH</Link>
-            </li>
-            <li>
-              <Link to="/ratepage">RATE</Link>
-            </li>
-            <li>
-              <Link to="/sliderpage">Slider</Link>
-            </li>
+            {components.map((info) => (
+              <li key={info.name}>
+                <Link to={info.path}>{info.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="ui-component">
           <Switch>
-            <Route exact path="/">
-              <BtnPage />
-            </Route>
-            <Route exact path="/cbpage">
-              <CBPage />
-            </Route>
-            <Route exact path="/radiopage">
-              <RadioPage />
-            </Route>
-            <Route exact path="/selectpage">
-              <SelectPage />
-            </Route>
-            <Route exact path="/switchpage">
-              <SwitchPage />
-            </Route>
-            <Route exact path="/ratepage">
-              <RatePage />
-            </Route>
-            <Route exact path="/sliderpage">
-              <SliderPage />
-            </Route>
-            <Route exact path="/inputpage">
-              <InputPage />
-            </Route>
+            {components.map((info) => (
+              <Route key={info.name} exact path={info.path}>
+                <info.page />
+              </Route>
+            ))}
           </Switch>
         </div>
       </div>

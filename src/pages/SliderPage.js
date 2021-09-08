@@ -9,10 +9,10 @@ function SliderPage() {
         <Slider color={SeaUIColor.blue} />
       </div>
       <div style={{ padding: "5px" }}>
-        <Slider color={SeaUIColor.blue} defaultValue="20" />
+        <Slider color={SeaUIColor.blue} defaultValue={20} />
       </div>
       <div style={{ padding: "5px" }}>
-        <Slider color={SeaUIColor.blue} step="5" defaultValue="20" />
+        <Slider color={SeaUIColor.blue} step={5} defaultValue={20} />
       </div>
     </div>
   );

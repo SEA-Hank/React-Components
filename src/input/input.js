@@ -66,7 +66,7 @@ export class Input extends SeaUIBase {
     let button = null;
     if (this.props.isShowBtn) {
       let btnAttrs = {
-        class: this.getClassNames("far", this.props.btnLogo, {
+        className: this.getClassNames("far", this.props.btnLogo, {
           "seaui-input-display-btn": this.state.value.length !== 0,
         }),
         onClick: this.props.btnOnClick || this.btnOnClick,

@@ -6,7 +6,7 @@ function SelectPage() {
     "font-style": "italic",
   };
   return (
-    <div className="cb-wrapper">
+    <div>
       <div style={{ padding: "5px" }}>
         <p style={style}>1. default select</p>
         <Select width="250px">
@@ -38,7 +38,7 @@ function SelectPage() {
         </Select>
       </div>
       <div style={{ padding: "5px" }}>
-        <p style={style}>4. mediun size select</p>
+        <p style={style}>4. medium size select</p>
         <Select
           defaultValue="3"
           width="250px"

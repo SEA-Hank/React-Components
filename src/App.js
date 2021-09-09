@@ -55,6 +55,10 @@ function App() {
   ];
   return (
     <Router>
+      <div className="header">
+        <p>React Components</p>
+        <p>check the code in github</p>
+      </div>
       <div className="App">
         <div className="menu">
           <ul>

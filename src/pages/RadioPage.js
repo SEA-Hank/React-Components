@@ -6,7 +6,7 @@ function RadioPage() {
     "font-style": "italic",
   };
   return (
-    <div className="cb-wrapper">
+    <div>
       <div style={{ padding: "5px" }}>
         <p style={style}>1. default radio</p>
         <Radio defaultValue="1">

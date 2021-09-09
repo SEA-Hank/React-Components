@@ -1,3 +1,7 @@
+.header {
+  width: 1000px;
+  margin: 0px auto;
+}
 .App {
   margin: 0px;
   padding: 0px;
@@ -6,12 +10,12 @@
   display: flex;
   gap: 60px;
   flex-direction: row;
-  padding: 50px 0px;
   & * {
     margin: 0px;
     padding: 0px;
   }
   .menu {
+    padding: 20px 0px;
     flex-basis: 180px;
     flex-grow: 0;
     flex-shrink: 0;

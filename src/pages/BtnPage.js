@@ -1,20 +1,9 @@
-import {
-  Button,
-  SeaUIColor,
-  SeaUISize,
-  // Radio,
-  // CheckBox,
-  // Select,
-  // Input,
-  // Switch,
-  // Rate,
-  // Slider,
-  // Tooltip,
-} from "../_util";
+import { Button, SeaUIColor, SeaUISize } from "../_util";
 import "./BtnPage.scss";
 function BtnPage() {
   return (
     <div className="component-wrapper">
+      <p>1. default buttons with various color</p>
       <div className="default-btn-wrapper">
         <Button text="Button"></Button>
         <Button text="Button" color={SeaUIColor.red}></Button>
@@ -23,6 +12,7 @@ function BtnPage() {
         <Button text="Button" color={SeaUIColor.orange}></Button>
         <Button text="Button" color={SeaUIColor.grey}></Button>
       </div>
+      <p>2. different sizes of buttons</p>
       <div className="btn-size-wrapper">
         <Button text="Small" size={SeaUISize.Small}></Button>
         <Button
@@ -36,6 +26,7 @@ function BtnPage() {
           color={SeaUIColor.yellow}
         ></Button>
       </div>
+      <p>3. icon buttons</p>
       <div className="icon-btn-wrapper">
         <Button type={Button.BtnType.iconBtn} icon="fa-bell"></Button>
         <Button
@@ -51,6 +42,7 @@ function BtnPage() {
           icon="fa-bug"
         ></Button>
       </div>
+      <p>4. default buttons with icon</p>
       <div className="icon-text-btn-wrapper">
         <Button
           type={Button.BtnType.leftIconBtn}

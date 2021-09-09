@@ -1,4 +1,9 @@
 div.component-wrapper {
+  p {
+    padding: 20px 5px;
+    font-family: system-ui;
+    font-style: italic;
+  }
   div {
     padding: 5px;
     display: flex;
